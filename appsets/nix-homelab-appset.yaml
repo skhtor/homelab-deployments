@@ -7,11 +7,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      repoURL: https://github.com/kostis-codefresh/many-appsets-demo.git
-      revision: HEAD
-      directories:
-      - path: apps
+    - git:
+        repoURL: https://github.com/skhtor/homelab-deployments.git
+        revision: HEAD
+        directories:
+          - path: apps
   template:
     metadata:
       name: '{{index .path.segments 1}}-{{index .path.segments 3}}' 
@@ -21,7 +21,7 @@ spec:
 
       # Source of the application manifests
       source:
-        repoURL: https://github.com/kostis-codefresh/many-appsets-demo.git
+        repoURL: https://github.com/skhtor/homelab-deployments.git
         targetRevision: HEAD
         path: '{{.path.path}}'
       
