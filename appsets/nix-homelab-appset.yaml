@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/skhtor/homelab-deployments.git
         revision: HEAD
         directories:
-          - path: apps
+          - path: apps/*
   template:
     metadata:
       name: '{{.path.basename}}'
