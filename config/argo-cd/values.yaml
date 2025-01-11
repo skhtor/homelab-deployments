@@ -8,6 +8,10 @@ crds:
 global:
   domain: example.com
 
+server:
+  service:
+    type: NodePort
+
 repoServer:
   autoscaling:
     enabled: true
