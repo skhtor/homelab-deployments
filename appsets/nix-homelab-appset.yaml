@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: my-prod-appset
+  name: nix-homelab-appset
   namespace: argocd
 spec:
   goTemplate: true
@@ -14,7 +14,7 @@ spec:
           - path: apps
   template:
     metadata:
-      name: '{{index .path.segments 1}}-{{index .path.segments 3}}' 
+      name: '{{.path.basename}}-{{.name}}'
     spec:
       # The project the application belongs to.
       project: default
@@ -28,7 +28,7 @@ spec:
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{index .path.segments 1}}-{{index .path.segments 3}}'
+        namespace: '{{.path.basename}}-{{.path.name}}'
 
       # Sync policy
       syncPolicy:
