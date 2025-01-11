@@ -45,11 +45,6 @@ repoServer:
   volumes:
     - name: custom-tools
       emptyDir: {}
-    - name: helmfile
-      configMap:
-        name: argocd-cmp-cm
-    - name: helmfile-tmp
-      emptyDir: {}
   volumeMounts:
     - mountPath: /custom-tools
       name: custom-tools
@@ -82,39 +77,6 @@ repoServer:
         - mountPath: /custom-tools
           name: custom-tools
 
-  extraContainers:
-    - name: helmfile
-      image: ghcr.io/helmfile/helmfile:v0.169.2
-      # Entrypoint should be Argo CD lightweight CMP server i.e. argocd-cmp-server
-      command: ["sh", "-ec"]
-      args:
-        - |
-          # Arbitrary startup commands here
-          /var/run/argocd/argocd-cmp-server
-      env:
-        - name: HELM_CACHE_HOME
-          value: /tmp/helm/cache
-        - name: HELM_CONFIG_HOME
-          value: /tmp/helm/config
-        - name: HELMFILE_CACHE_HOME
-          value: /tmp/helmfile/cache
-        - name: HELMFILE_TEMPDIR
-          value: /tmp/helmfile/tmp
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: entrypoint
-        # Register helmfile plugin into sidecar
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: helmfile.yaml
-          name: helmfile
-
 configs:
   cm:
     url: https://example.com
@@ -130,32 +92,6 @@ configs:
     application.namespaces: "*"
     controller.repo.server.timeout.seconds: 180
 
-  cmp:
-    create: true
-    plugins:
-      helmfile:
-        allowConcurrency: true
-        discover:
-          fileName: helmfile.yaml
-        generate:
-          command:
-            - bash
-            - "-c"
-            - |
-              if [[ -n "$ARGOCD_ENV_HELMFILE_RELEASE_NAME" ]]; then
-                helmfile template \
-                  --environment "${ARGOCD_ENV_HELMFILE_ENVIRONMENT:-default}" \
-                  --file "${ARGOCD_ENV_HELMFILE_FILE:-helmfile.yaml}" \
-                  --selector name="$ARGOCD_ENV_HELMFILE_RELEASE_NAME" \
-                  --include-crds --quiet --skip-deps
-              else
-                helmfile template \
-                  --environment "${ARGOCD_ENV_HELMFILE_ENVIRONMENT:-default}" \
-                  --file "${ARGOCD_ENV_HELMFILE_FILE:-helmfile.yaml}" \
-                  --include-crds --quiet --skip-deps
-              fi
-        lockRepo: false
-
   rbac:
     policy.default: "role:readonly"
 
@@ -166,4 +102,7 @@ configs:
 ### Disabled components:
 
 notifications:
+  enabled: false
+
+dex:
   enabled: false
