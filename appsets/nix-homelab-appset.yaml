@@ -14,7 +14,7 @@ spec:
           - path: apps
   template:
     metadata:
-      name: '{{.path.basename}}-{{.name}}'
+      name: '{{.path.basename}}'
     spec:
       # The project the application belongs to.
       project: default
@@ -28,7 +28,7 @@ spec:
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}-{{.path.name}}'
+        namespace: '{{.path.basename}}'
 
       # Sync policy
       syncPolicy:
