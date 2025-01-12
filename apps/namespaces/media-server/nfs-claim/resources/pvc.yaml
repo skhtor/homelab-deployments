@@ -8,3 +8,4 @@ spec:
   resources:
     requests:
       storage: 20Ti
+  storageClassName: "" # Prevent Longhorn from overtaking
