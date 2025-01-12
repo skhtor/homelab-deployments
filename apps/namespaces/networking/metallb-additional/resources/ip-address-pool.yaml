@@ -3,7 +3,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: pool
-  namespace: metallb-system
+  namespace: networking
 spec:
   addresses:
     - 192.168.20.192/26
