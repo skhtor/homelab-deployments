@@ -5,11 +5,13 @@ argo-cd:
 
   ## Globally shared configuration
   global:
-    domain: example.com
+    domain: argocd.home
 
   server:
-    service:
-      type: NodePort
+    ingress:
+      enabled: true
+      hosts:
+        - argocd.home
 
   repoServer:
     autoscaling:
@@ -82,7 +84,7 @@ argo-cd:
 
   configs:
     cm:
-      url: https://example.com
+      url: http://argocd.home
       helm.valuesFileSchemes: >-
         secrets+gpg-import, secrets+gpg-import-kubernetes,
         secrets+age-import, secrets+age-import-kubernetes,
