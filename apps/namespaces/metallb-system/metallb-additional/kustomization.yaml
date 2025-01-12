@@ -3,5 +3,5 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/managed-by: Kustomize
 resources:
-  - ./base/ip-address-pool.yaml
-  - ./base/l2-advertisement.yaml
+  - ./resources/ip-address-pool.yaml
+  - ./resources/l2-advertisement.yaml
