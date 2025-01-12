@@ -11,10 +11,10 @@ spec:
         repoURL: https://github.com/skhtor/homelab-deployments.git
         revision: HEAD
         directories:
-          - path: apps/*
+          - path: apps/namespaces/*/*
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: '{{ .path.basename }}'
     spec:
       # The project the application belongs to.
       project: default
@@ -23,12 +23,12 @@ spec:
       source:
         repoURL: https://github.com/skhtor/homelab-deployments.git
         targetRevision: HEAD
-        path: '{{.path.path}}'
+        path: '{{ .path.path }}'
       
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: '{{ index .path.segments 3 }}'
 
       # Sync policy
       syncPolicy:
