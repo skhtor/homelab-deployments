@@ -15,9 +15,9 @@ spec:
       containers:
       - name: minecraft-br
         image: itzg/minecraft-bedrock-server
-        securityContext:
-          privileged: true
-          runAsUser: 0
+        env:
+          - name: EULA
+            value: "TRUE"
         ports:
         - name: udp
           containerPort: 19132
