@@ -24,7 +24,7 @@ spec:
               command: ["bash", "/scripts/run.sh"]
               envFrom:
                 - secretRef:
-                    name: cloudflare-ddns-secret
+                    name: ddns-cron-secret
               volumeMounts:
                 - name: script-volume
                   mountPath: /scripts
