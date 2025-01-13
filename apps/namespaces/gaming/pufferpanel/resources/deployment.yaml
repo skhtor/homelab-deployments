@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pufferpanel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pufferpanel
+  template:
+    metadata:
+      labels:
+        app: pufferpanel
+    spec:
+      containers:
+      - name: pufferpanel
+        image: pufferpanel/pufferpanel
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 5657
+          protocol: TCP
+        - name: minecraft-br-tcp1
+          containerPort: 19132
+          protocol: TCP
+        - name: minecraft-br-tcp2
+          containerPort: 19133
+          protocol: TCP
+        - name: minecraft-br-udp1
+          containerPort: 19132
+          protocol: UDP
+        - name: minecraft-br-udp2
+          containerPort: 19133
+          protocol: UDP
+        volumeMounts:
+        - name: pufferpanel-data
+          mountPath: /etc/pufferpanel
+        - name: pufferpanel-lib
+          mountPath: /var/lib/pufferpanel
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+          readOnly: false
+      volumes:
+      - name: pufferpanel-data
+        persistentVolumeClaim:
+          claimName: pufferpanel-pvc
+      - name: pufferpanel-lib
+        persistentVolumeClaim:
+          claimName: pufferpanel-pvc
+      - name: docker-sock
+        hostPath:
+          path: "/var/run/docker.sock"
+          type: File
