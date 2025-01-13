@@ -4,7 +4,5 @@ commonLabels:
   app.kubernetes.io/managed-by: Kustomize
 resources:
   - ./resources/deployment.yaml
-  - ./resources/ingress.yaml
-  - ./resources/mc-br-svc.yaml
   - ./resources/pvc.yaml
   - ./resources/service.yaml
