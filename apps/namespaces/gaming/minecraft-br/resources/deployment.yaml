@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-br
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft-br
+  template:
+    metadata:
+      labels:
+        app: minecraft-br
+    spec:
+      containers:
+      - name: minecraft-br
+        image: itzg/minecraft-bedrock-server
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        ports:
+        - name: udp
+          containerPort: 19132
+          protocol: UDP
+        volumeMounts:
+        - name: minecraft-br-data
+          mountPath: /data
+      volumes:
+      - name: minecraft-br-data
+        persistentVolumeClaim:
+          claimName: minecraft-br-pvc
