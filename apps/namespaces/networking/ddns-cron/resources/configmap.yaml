@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ddns-duckdns-update-script-configmap
+data:
+  run.sh: |
+    echo url="https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" | \
+    curl -k -o ~/duckdns/duck.log -K -

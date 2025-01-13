@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ddns-cron
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 5
+  startingDeadlineSeconds: 60
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    metadata:
+      name: ddns-cron-job
+    spec:
+      activeDeadlineSeconds: 240
+      backoffLimit: 3
+      template:
+        metadata:
+          name: ddns-cron-job
+        spec:
+          containers:
+            - name: ddns-cron-job
+              image: fedora:36
+              command: ["bash", "/scripts/run.sh"]
+              envFrom:
+                - secretRef:
+                    name: cloudflare-ddns-secret
+              volumeMounts:
+                - name: script-volume
+                  mountPath: /scripts
+          volumes:
+            - name: script-volume
+              configMap:
+                  name: ddns-duckdns-update-script-configmap
+          restartPolicy: OnFailure
