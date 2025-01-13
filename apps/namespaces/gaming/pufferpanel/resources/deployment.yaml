@@ -24,16 +24,16 @@ spec:
           protocol: TCP
         - containerPort: 5657
           protocol: TCP
-        - name: minecraft-br-tcp1
+        - name: mc-br-tcp1
           containerPort: 19132
           protocol: TCP
-        - name: minecraft-br-tcp2
+        - name: mc-br-tcp2
           containerPort: 19133
           protocol: TCP
-        - name: minecraft-br-udp1
+        - name: mc-br-udp1
           containerPort: 19132
           protocol: UDP
-        - name: minecraft-br-udp2
+        - name: mc-br-udp2
           containerPort: 19133
           protocol: UDP
         volumeMounts:

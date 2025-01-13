@@ -4,5 +4,5 @@ commonLabels:
   app.kubernetes.io/managed-by: Kustomize
 resources:
   - ./resources/deployment.yaml
-  - ./resources/minecraft-br-svc.yaml
+  - ./resources/mc-br-svc.yaml
   - ./resources/pvc.yaml
