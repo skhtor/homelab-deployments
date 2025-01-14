@@ -1,0 +1,8 @@
+apiVersion: v2
+name: external-secrets
+version: '1.0.0'
+
+dependencies:
+  - name: external-secrets
+    version: 8.5.5
+    repository: https://external-secrets.github.io/kubernetes-external-secrets/
