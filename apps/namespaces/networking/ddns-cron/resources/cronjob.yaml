@@ -7,7 +7,7 @@ spec:
   failedJobsHistoryLimit: 5
   successfulJobsHistoryLimit: 5
   startingDeadlineSeconds: 60
-  schedule: "*/5 * * * *"
+  schedule: "*/15 * * * *"
   jobTemplate:
     metadata:
       name: ddns-cron-job
@@ -20,7 +20,7 @@ spec:
         spec:
           containers:
             - name: ddns-cron-job
-              image: fedora:36
+              image: alpine
               command: ["bash", "/scripts/run.sh"]
               envFrom:
                 - secretRef:
