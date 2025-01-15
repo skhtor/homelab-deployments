@@ -16,6 +16,10 @@ spec:
       - name: sonarr
         image: lscr.io/linuxserver/sonarr
         env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 100
         ports:
         - name: http
           containerPort: 8989

@@ -16,6 +16,10 @@ spec:
       - name: radarr
         image: lscr.io/linuxserver/radarr
         env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 100
         ports:
         - name: http
           containerPort: 7878
