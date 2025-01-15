@@ -22,7 +22,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: sonarr-data
-          mountPath: /data
+          mountPath: /config
         - name: nfs-media
           mountPath: /tv
           subPath: tv
