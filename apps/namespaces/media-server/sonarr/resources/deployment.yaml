@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr
+        env:
+        ports:
+        - name: http
+          containerPort: 8989
+          protocol: TCP
+        volumeMounts:
+        - name: sonarr-data
+          mountPath: /data
+        - name: sonarr-tv
+          mountPath: /tv
+          subPath: tv
+      volumes:
+      - name: sonarr-data
+        persistentVolumeClaim:
+          claimName: sonarr-data-pvc
+      - name: sonarr-tv
+        persistentVolumeClaim:
+          claimName: media-server-nfs-pvc
