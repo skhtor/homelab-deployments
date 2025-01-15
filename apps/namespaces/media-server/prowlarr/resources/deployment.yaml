@@ -27,16 +27,7 @@ spec:
         volumeMounts:
         - name: prowlarr-data
           mountPath: /config
-        - name: nfs-media
-          mountPath: /tv
-          subPath: tv
-        - name: nfs-media
-          mountPath: /downloads
-          subPath: downloads
       volumes:
       - name: prowlarr-data
         persistentVolumeClaim:
           claimName: prowlarr-data-pvc
-      - name: nfs-media
-        persistentVolumeClaim:
-          claimName: media-server-nfs-pvc
