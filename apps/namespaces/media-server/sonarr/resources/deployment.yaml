@@ -20,6 +20,8 @@ spec:
           value: "1000"
         - name: PGID
           value: "100"
+        - name: TZ
+          value: Australia/Melbourne
         ports:
         - name: http
           containerPort: 8989
