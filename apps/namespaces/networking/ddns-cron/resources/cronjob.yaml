@@ -21,7 +21,7 @@ spec:
           containers:
             - name: ddns-cron-job
               image: alpine
-              command: ["bash", "/scripts/run.sh"]
+              command: ["sh", "/scripts/run.sh"]
               envFrom:
                 - secretRef:
                     name: ddns-cron-secret
