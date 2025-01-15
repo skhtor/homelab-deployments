@@ -3,3 +3,6 @@ longhorn:
     ## Set to true to enable ingress record generation
     enabled: true
     host: longhorn.home
+
+    persistence:
+      defaultClassReplicaCount: 1
