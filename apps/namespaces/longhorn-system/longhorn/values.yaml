@@ -4,5 +4,5 @@ longhorn:
     enabled: true
     host: longhorn.home
 
-    persistence:
-      defaultClassReplicaCount: 1
+    defaultSettings:
+      defaultClassReplicaCount: 1 # Set this to 1 for single-node cluster
