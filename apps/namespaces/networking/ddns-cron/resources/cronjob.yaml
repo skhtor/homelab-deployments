@@ -20,8 +20,8 @@ spec:
         spec:
           containers:
             - name: ddns-cron-job
-              image: alpine
-              command: ["sh", "/scripts/run.sh"]
+              image: fedora:36
+              command: ["bash", "/scripts/run.sh"]
               envFrom:
                 - secretRef:
                     name: ddns-cron-secret
