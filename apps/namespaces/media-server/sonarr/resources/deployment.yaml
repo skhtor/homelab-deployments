@@ -23,13 +23,16 @@ spec:
         volumeMounts:
         - name: sonarr-data
           mountPath: /data
-        - name: sonarr-tv
+        - name: nfs-media
           mountPath: /tv
           subPath: tv
+        - name: nfs-media
+          mountPath: /downloads
+          subPath: downloads
       volumes:
       - name: sonarr-data
         persistentVolumeClaim:
           claimName: sonarr-data-pvc
-      - name: sonarr-tv
+      - name: nfs-media
         persistentVolumeClaim:
           claimName: media-server-nfs-pvc
