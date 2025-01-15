@@ -7,5 +7,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 23Ti
+      storage: 20Ti
   storageClassName: "" # Prevent Longhorn from overtaking
