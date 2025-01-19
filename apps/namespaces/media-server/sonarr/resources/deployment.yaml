@@ -30,7 +30,7 @@ spec:
         - name: sonarr-data
           mountPath: /config
         - name: nfs-media
-          mountPath: /
+          mountPath: /media
       volumes:
       - name: sonarr-data
         persistentVolumeClaim:

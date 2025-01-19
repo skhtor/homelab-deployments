@@ -30,7 +30,7 @@ spec:
         - name: radarr-data
           mountPath: /config
         - name: nfs-media
-          mountPath: /
+          mountPath: /media
       volumes:
       - name: radarr-data
         persistentVolumeClaim:
