@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prowlarr
+  name: nzbget
   namespace: media-server
 spec:
   rules:
-    - host: prowlarr.home
+    - host: nzbget.home
       http:
         paths:
           - backend:
               service:
-                name: prowlarr
+                name: nzbget
                 port:
                   number: 80
             path: /
