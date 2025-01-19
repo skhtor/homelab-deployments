@@ -36,3 +36,6 @@ spec:
       - name: nzbget-data
         persistentVolumeClaim:
           claimName: nzbget-data-pvc
+      - name: nfs-media
+        persistentVolumeClaim:
+          claimName: media-server-nfs-pvc
