@@ -6,3 +6,4 @@ longhorn:
 
     defaultSettings:
       defaultClassReplicaCount: 1 # Set this to 1 for single-node cluster
+      backupTarget: "nfs://192.168.20.21:/mnt/user/longhorn-backup"
