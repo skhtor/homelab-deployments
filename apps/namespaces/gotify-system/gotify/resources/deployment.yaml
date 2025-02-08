@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotify
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gotify
+  template:
+    metadata:
+      labels:
+        app: gotify
+    spec:
+      containers:
+      - name: gotify
+        image: gotify/server
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "100"
+        - name: TZ
+          value: Australia/Melbourne
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: gotify-data
+          mountPath: /app/data
+      volumes:
+      - name: gotify-data
+        persistentVolumeClaim:
+          claimName: gotify-data-pvc
