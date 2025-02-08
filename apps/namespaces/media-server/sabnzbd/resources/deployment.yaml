@@ -30,7 +30,7 @@ spec:
         - name: sabnzbd-data
           mountPath: /config
         - name: nfs-media
-          mountPath: /downloads
+          mountPath: /media/downloads/usenet
           subPath: downloads/usenet
       volumes:
       - name: sabnzbd-data
