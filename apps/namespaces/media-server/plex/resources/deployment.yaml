@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+      - name: plex
+        image: lscr.io/linuxserver/plex
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "100"
+        - name: TZ
+          value: Australia/Melbourne
+        ports:
+        - name: http
+          containerPort: 32400
+          protocol: TCP
+        volumeMounts:
+        - name: plex-data
+          mountPath: /config
+        - name: nfs-media
+          mountPath: /live
+          subPath: live
+      volumes:
+      - name: plex-data
+        persistentVolumeClaim:
+          claimName: plex-data-pvc
+      - name: nfs-media
+        persistentVolumeClaim:
+          claimName: media-server-nfs-pvc
