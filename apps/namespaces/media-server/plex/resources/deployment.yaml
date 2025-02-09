@@ -16,17 +16,16 @@ spec:
       - name: plex
         image: lscr.io/linuxserver/plex
         env:
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: "all"
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: "compute,video,utility"
         - name: PUID
           value: "1000"
         - name: PGID
           value: "100"
         - name: VERSION
           value: "docker"
-        - name: PLEX_CLAIM
-          valueFrom:
-            secretKeyRef:
-              key: PLEX_CLAIM
-              name: plex-claim
         - name: TZ
           value: Australia/Melbourne
         ports:
