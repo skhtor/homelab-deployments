@@ -1,0 +1,10 @@
+gotify:
+  server:
+    timezone: Australia/Melbourne
+  ingress:
+    enabled: true
+    hosts:
+      - host: gotify.home
+  persistence:
+    enabled: true
+    size: 10Gi
