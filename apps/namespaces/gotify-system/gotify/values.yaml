@@ -5,6 +5,9 @@ gotify:
     enabled: true
     hosts:
       - host: gotify.home
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
   persistence:
     enabled: true
     size: 10Gi
