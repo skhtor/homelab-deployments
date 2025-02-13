@@ -7,6 +7,7 @@ pihole:
     enabled: true
     hosts:
       - "pihole.home"
+    path: /admin
   serviceWeb:
     loadBalancerIP: 192.168.20.250
     annotations:
