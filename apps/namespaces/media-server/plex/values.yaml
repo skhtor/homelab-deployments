@@ -33,3 +33,4 @@ plex-media-server:
     TZ: "Australia/Melbourne"
     PLEX_UID: "1000"
     PLEX_GID: "100"
+    ALLOWED_NETWORKS: "192.168.20.0/24,100.64.0.0/10"
