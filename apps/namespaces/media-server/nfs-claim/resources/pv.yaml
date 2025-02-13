@@ -12,3 +12,10 @@ spec:
   nfs:
     path: /mnt/user/media
     server: 192.168.20.21
+  mountOptions:
+    - nfsvers=4.2
+    - async
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
