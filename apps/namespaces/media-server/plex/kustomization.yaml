@@ -5,3 +5,4 @@ commonLabels:
 resources:
   - ./resources/deployment.yaml
   - ./resources/pvc.yaml
+  - ./resources/service.yaml
