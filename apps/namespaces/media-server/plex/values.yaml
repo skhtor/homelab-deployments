@@ -1,0 +1,35 @@
+plex-media-server:
+  pms:
+    configStorage: 20Gi
+    gpu:
+      nvidia:
+        enabled: true
+  rclone:
+    # -- If the rclone sidecar should be created
+    enabled: true
+
+    # -- The name of the secret that contains the rclone configuration file.
+    # The rclone config key must be called `rclone.conf` in the secret
+    #
+    # All keys in configSecret will be available in /etc/rclone/. This might
+    # be useful if other files are needed, such as a private key for sftp mode.
+    configSecret: "rclone-config"
+
+
+    # -- The remote drive that should be mounted using rclone
+    # this must be in the form of `name:[/optional/path]`
+    # this remote will be mounted at `/data/name` in the PMS container
+    remotes:
+      - "unraid:live"
+
+  service:
+    type: NodePort
+    port: 32400
+    nodePort: 32400
+    externalTrafficPolicy: Local
+
+  extraEnv:
+    HOSTNAME: "Skhtor"
+    TZ: "Australia/Melbourne"
+    PLEX_UID: "1000"
+    PLEX_GID: "100"
