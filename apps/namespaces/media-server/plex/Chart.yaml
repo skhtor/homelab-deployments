@@ -5,5 +5,5 @@ version: '1.0.0'
 dependencies:
   - name: plex-media-server
     version: 0.8.0
-    repository: https://charts.longhorn.io
+    repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
 
