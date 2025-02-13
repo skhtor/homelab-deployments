@@ -38,6 +38,10 @@ spec:
         - name: nfs-media
           mountPath: /live
           subPath: live
+        resources:
+          requests:
+            cpu: 2   # Reserves 0.5 vCPU for Plex
+            memory: "4Gi" # Ensures Plex always has at least 2GB RAM
       volumes:
       - name: plex-data
         persistentVolumeClaim:

@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: plex
-  namespace: media-server
 spec:
   rules:
     - host: plex.home
