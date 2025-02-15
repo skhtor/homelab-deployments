@@ -1,0 +1,10 @@
+apiVersion: v2
+name: nvdp
+version: '1.0.0'
+
+dependencies:
+  - name: nvdp
+    version: 0.17.0
+    repository: https://nvidia.github.io/k8s-device-plugin
+
+
