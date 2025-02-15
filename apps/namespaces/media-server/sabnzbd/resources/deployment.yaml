@@ -32,6 +32,7 @@ spec:
         - name: nfs-media
           mountPath: /media/downloads/usenet
           subPath: downloads/usenet
+      imagePullPolicy: Always
       volumes:
       - name: sabnzbd-data
         persistentVolumeClaim:

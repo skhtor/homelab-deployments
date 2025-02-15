@@ -29,6 +29,7 @@ spec:
         volumeMounts:
         - name: prowlarr-data
           mountPath: /config
+      imagePullPolicy: Always
       volumes:
       - name: prowlarr-data
         persistentVolumeClaim:

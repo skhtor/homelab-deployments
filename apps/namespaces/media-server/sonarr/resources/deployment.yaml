@@ -31,6 +31,7 @@ spec:
           mountPath: /config
         - name: nfs-media
           mountPath: /media
+      imagePullPolicy: Always
       volumes:
       - name: sonarr-data
         persistentVolumeClaim:
