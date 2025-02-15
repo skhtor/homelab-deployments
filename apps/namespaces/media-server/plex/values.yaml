@@ -6,6 +6,11 @@ plex-media-server:
     gpu:
       nvidia:
         enabled: true
+    resources:
+      limits:
+        nvidia.com/gpu-all: "1"
+      requests:
+        nvidia.com/gpu-all: "1"
   rclone:
     # -- If the rclone sidecar should be created
     enabled: true
