@@ -1,11 +1,10 @@
 plex-media-server:
   image:
+    registry: lscr.io
+    repository: linuxserver/plex
     pullPolicy: Always
   pms:
     configStorage: 20Gi
-    gpu:
-      nvidia:
-        enabled: true
     resources:
       limits:
         nvidia.com/gpu-all: "1"
@@ -22,7 +21,6 @@ plex-media-server:
     # be useful if other files are needed, such as a private key for sftp mode.
     configSecret: "rclone-config"
 
-
     # -- The remote drive that should be mounted using rclone
     # this must be in the form of `name:[/optional/path]`
     # this remote will be mounted at `/data/name` in the PMS container
@@ -38,6 +36,8 @@ plex-media-server:
   extraEnv:
     HOSTNAME: "Skhtor"
     TZ: "Australia/Melbourne"
-    PLEX_UID: "1000"
-    PLEX_GID: "100"
+    PUID: "1000"
+    PGID: "100"
+    NVIDIA_VISIBLE_DEVICES: all
+    NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
     ALLOWED_NETWORKS: "192.168.20.0/24,100.64.0.0/10"
