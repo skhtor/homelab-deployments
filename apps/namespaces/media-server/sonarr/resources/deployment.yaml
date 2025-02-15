@@ -15,6 +15,7 @@ spec:
       containers:
       - name: sonarr
         image: lscr.io/linuxserver/sonarr
+        imagePullPolicy: Always
         env:
         - name: PUID
           value: "1000"
@@ -31,7 +32,6 @@ spec:
           mountPath: /config
         - name: nfs-media
           mountPath: /media
-      imagePullPolicy: Always
       volumes:
       - name: sonarr-data
         persistentVolumeClaim:

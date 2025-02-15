@@ -15,6 +15,7 @@ spec:
       containers:
       - name: prowlarr
         image: lscr.io/linuxserver/prowlarr
+        imagePullPolicy: Always
         env:
         - name: PUID
           value: "1000"
@@ -29,7 +30,6 @@ spec:
         volumeMounts:
         - name: prowlarr-data
           mountPath: /config
-      imagePullPolicy: Always
       volumes:
       - name: prowlarr-data
         persistentVolumeClaim:

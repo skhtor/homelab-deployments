@@ -15,6 +15,7 @@ spec:
       containers:
       - name: radarr
         image: lscr.io/linuxserver/radarr
+        imagePullPolicy: Always
         env:
         - name: PUID
           value: "1000"
@@ -31,7 +32,6 @@ spec:
           mountPath: /config
         - name: nfs-media
           mountPath: /media
-      imagePullPolicy: Always
       volumes:
       - name: radarr-data
         persistentVolumeClaim:

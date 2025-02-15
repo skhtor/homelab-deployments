@@ -1,4 +1,6 @@
 plex-media-server:
+  image:
+    pullPolicy: Always
   pms:
     configStorage: 20Gi
     gpu:
