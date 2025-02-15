@@ -20,7 +20,7 @@ plex-media-server:
     # this must be in the form of `name:[/optional/path]`
     # this remote will be mounted at `/data/name` in the PMS container
     remotes:
-      - "unraid:live"
+      - "unraid:media/live"
 
   service:
     type: NodePort
