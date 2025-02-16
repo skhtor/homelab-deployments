@@ -15,6 +15,9 @@ helmCharts:
     providers:
       kubernetesCRD:
         enabled: true
+    ingressRoute:
+      dashboard:
+        enabled: true
 - name: traefik-crds
   releaseName: traefik-crds
   namespace: networking
