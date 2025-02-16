@@ -9,3 +9,9 @@ helmCharts:
   namespace: networking
   version: 34.3.0
   repo: https://traefik.github.io/charts
+  valuesInline:
+    ingressClass:
+      isDefaultClass: false
+    providers:
+      kubernetesCRD:
+        enabled: true
