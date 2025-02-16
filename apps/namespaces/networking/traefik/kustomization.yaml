@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
+labels:
   app.kubernetes.io/managed-by: Kustomize
 
 helmCharts:
@@ -8,4 +8,4 @@ helmCharts:
   releaseName: traefik
   namespace: networking
   version: 34.3.0
-  repo: https://containous.github.io/traefik-helm-chart
+  repo: https://traefik.github.io/charts
