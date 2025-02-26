@@ -1,0 +1,25 @@
+apiVersion: v2
+name: cert-manager
+version: '1.0.0'
+
+dependencies:
+  - name: cert-manager
+    version: 1.17.1
+    repository: https://charts.jetstack.io
+
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/managed-by: Kustomize
+
+helmCharts:
+- name: cert-manager
+  releaseName: cert-manager
+  namespace: security
+  version: 1.17.1
+  repo: https://charts.jetstack.io
+  valuesInline:
+    global:
+      leaderElection:
+        namespace: security
