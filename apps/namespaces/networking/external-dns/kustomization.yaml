@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/managed-by: Kustomize
+
+helmCharts:
+- name: external-dns
+  releaseName: external-dns
+  namespace: networking
+  version: 8.0.1
+  repo: https://charts.bitnami.com/bitnami
+  valuesInline:
+    provider: pihole
+    policy: upsert-only
+    txtOwnerId: "homelab"
+    pihole:
+      server: http://pihole-web.networking.svc.cluster.local
+    extraEnvVars:
+      - name: EXTERNAL_DNS_PIHOLE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: pihole-password
+            key: password
+    serviceAccount:
+      create: true
+      name: "external-dns"
+    ingressClassFilters:
+      - nginx-internal
