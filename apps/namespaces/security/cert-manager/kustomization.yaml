@@ -13,3 +13,4 @@ helmCharts:
     global:
       leaderElection:
         namespace: security
+    installCRDs: true
