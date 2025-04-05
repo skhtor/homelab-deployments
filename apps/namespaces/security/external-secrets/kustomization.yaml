@@ -9,3 +9,6 @@ helmCharts:
   namespace: security
   version: 0.12.1
   repo: https://charts.external-secrets.io
+
+resources:
+  - ./resources/secretstore.yaml
