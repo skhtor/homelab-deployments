@@ -31,7 +31,7 @@ spec:
           volumes:
             - name: app-data
               persistentVolumeClaim:
-                claimName: media-app-data
+                claimName: configarr-data-pvc
             - name: config-volume
               configMap:
                 name: configarr
