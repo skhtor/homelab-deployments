@@ -3,4 +3,6 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/managed-by: Kustomize
 resources:
+  - ./resources/configmap.yaml
+  - ./resources/cronjob.yaml
   - ./resources/external-secrets.yaml
