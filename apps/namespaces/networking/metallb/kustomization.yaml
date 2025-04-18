@@ -9,3 +9,7 @@ helmCharts:
   namespace: networking
   version: 0.14.9
   repo: https://metallb.github.io/metallb
+
+resources:
+  - ./resources/ip-address-pool.yaml
+  - ./resources/l2-advertisement.yaml
