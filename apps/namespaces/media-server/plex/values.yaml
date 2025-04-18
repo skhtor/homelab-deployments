@@ -1,44 +1,43 @@
-plex-media-server:
-  image:
-    registry: lscr.io
-    repository: linuxserver/plex
-    pullPolicy: Always
-  pms:
-    configStorage: 20Gi
-    resources:
-      limits:
-        nvidia.com/gpu-all: "1"
-      requests:
-        nvidia.com/gpu-all: "1"
-  rclone:
-    # -- If the rclone sidecar should be created
-    enabled: true
+image:
+  registry: lscr.io
+  repository: linuxserver/plex
+  pullPolicy: Always
+pms:
+  configStorage: 20Gi
+  resources:
+    limits:
+      nvidia.com/gpu-all: "1"
+    requests:
+      nvidia.com/gpu-all: "1"
+rclone:
+  # -- If the rclone sidecar should be created
+  enabled: true
 
-    # -- The name of the secret that contains the rclone configuration file.
-    # The rclone config key must be called `rclone.conf` in the secret
-    #
-    # All keys in configSecret will be available in /etc/rclone/. This might
-    # be useful if other files are needed, such as a private key for sftp mode.
-    configSecret: "rclone-config"
+  # -- The name of the secret that contains the rclone configuration file.
+  # The rclone config key must be called `rclone.conf` in the secret
+  #
+  # All keys in configSecret will be available in /etc/rclone/. This might
+  # be useful if other files are needed, such as a private key for sftp mode.
+  configSecret: "rclone-config"
 
-    readOnly: false
-    # -- The remote drive that should be mounted using rclone
-    # this must be in the form of `name:[/optional/path]`
-    # this remote will be mounted at `/data/name` in the PMS container
-    remotes:
-      - "unraid:media/live"
+  readOnly: false
+  # -- The remote drive that should be mounted using rclone
+  # this must be in the form of `name:[/optional/path]`
+  # this remote will be mounted at `/data/name` in the PMS container
+  remotes:
+    - "unraid:media/live"
 
-  service:
-    type: NodePort
-    port: 32400
-    nodePort: 32400
-    externalTrafficPolicy: Local
+service:
+  type: NodePort
+  port: 32400
+  nodePort: 32400
+  externalTrafficPolicy: Local
 
-  extraEnv:
-    HOSTNAME: "Skhtor"
-    TZ: "Australia/Melbourne"
-    PUID: "1000"
-    PGID: "100"
-    NVIDIA_VISIBLE_DEVICES: all
-    NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
-    ALLOWED_NETWORKS: "192.168.20.0/24,100.64.0.0/10"
+extraEnv:
+  HOSTNAME: "Skhtor"
+  TZ: "Australia/Melbourne"
+  PUID: "1000"
+  PGID: "100"
+  NVIDIA_VISIBLE_DEVICES: all
+  NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
+  ALLOWED_NETWORKS: "192.168.20.0/24,100.64.0.0/10"
