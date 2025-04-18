@@ -5,7 +5,7 @@ commonLabels:
 
 helmCharts:
 - name: ingress-nginx
-  releaseName: external-dns
+  releaseName: ingress-nginx-internal
   namespace: networking
   version: 4.10.1
   repo: https://kubernetes.github.io/ingress-nginx
