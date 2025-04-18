@@ -5,7 +5,7 @@ commonLabels:
 
 helmCharts:
 - name: plex-media-server
-  releaseName: plex
+  releaseName: plex-media-server
   namespace: media-server
   version: 0.8.0
   repo: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages
