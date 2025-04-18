@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app.kubernetes.io/managed-by: Kustomize
+
+helmCharts:
+- name: gotify
+  releaseName: gotify
+  namespace: gotify-system
+  version: 0.5.1
+  repo: https://pmoscode-helm.github.io/gotify/
+  valuesInline:
+    server:
+      timezone: Australia/Melbourne
+    ingress:
+      enabled: true
+      hosts:
+        - host: gotify.home
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+    persistence:
+      enabled: true
+      size: 10Gi
