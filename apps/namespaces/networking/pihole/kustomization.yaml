@@ -7,6 +7,6 @@ helmCharts:
 - name: pihole
   releaseName: pihole
   namespace: networking
-  version: 2.18.0
+  version: 2.29.1
   repo: https://mojo2600.github.io/pihole-kubernetes/
   valuesFile: values.yaml
