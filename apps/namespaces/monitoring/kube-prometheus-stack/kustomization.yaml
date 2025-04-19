@@ -12,4 +12,6 @@ helmCharts:
   includeCRDs: true
 
 patchesStrategicMerge:
-  - patches/crd.yaml
+  - target:
+      kind: CustomResourceDefinition
+    path: patches/crd.yaml

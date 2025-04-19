@@ -3,4 +3,4 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
-  name: prometheusagents.monitoring.coreos.com
+  name: dummy # will be ignored by the selector
