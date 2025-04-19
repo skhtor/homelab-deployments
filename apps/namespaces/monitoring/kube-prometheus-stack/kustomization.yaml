@@ -10,3 +10,9 @@ helmCharts:
   version: 70.7.0
   repo: https://prometheus-community.github.io/helm-charts
   includeCRDs: true
+
+patches:
+  - target:
+      kind: CustomResourceDefinition
+      name: prometheusagents.monitoring.coreos.com
+    path: patches/crd.yaml
