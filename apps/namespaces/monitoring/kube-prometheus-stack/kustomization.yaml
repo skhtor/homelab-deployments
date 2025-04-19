@@ -8,4 +8,4 @@ helmCharts:
   releaseName: kube-prometheus-stack
   namespace: monitoring
   version: 70.7.0
-  repo: https://kubernetes-sigs.github.io/metrics-server/
+  repo: https://prometheus-community.github.io/helm-charts
