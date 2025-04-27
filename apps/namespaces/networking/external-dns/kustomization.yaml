@@ -6,7 +6,7 @@ helmCharts:
   releaseName: external-dns
   namespace: networking
   version: 8.8.0
-  repo: oci://registry-1.docker.io/bitnamicharts/external-dns
+  repo: https://charts.bitnami.com/bitnami
   valuesInline:
     provider: pihole
     policy: upsert-only
