@@ -7,9 +7,7 @@ pms:
   configStorage: 20Gi
   resources:
     limits:
-      nvidia.com/gpu-all: "1"
-    requests:
-      nvidia.com/gpu-all: "1"
+      nvidia.com/gpu-0: "1"
 rclone:
   # -- If the rclone sidecar should be created
   enabled: true
