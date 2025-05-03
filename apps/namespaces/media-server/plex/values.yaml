@@ -35,8 +35,8 @@ service:
 extraEnv:
   HOSTNAME: "Skhtor"
   TZ: "Australia/Melbourne"
-  PUID: "1000"
-  PGID: "100"
+  PLEX_UID: "1000"
+  PLEX_GID: "100"
   NVIDIA_VISIBLE_DEVICES: all
   NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
   ALLOWED_NETWORKS: "192.168.20.0/24,100.64.0.0/10"
