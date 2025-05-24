@@ -19,8 +19,5 @@ helmCharts:
           secretKeyRef:
             name: pihole-password
             key: password
-    serviceAccount:
-      create: true
-      name: "external-dns"
     ingressClassFilters:
       - nginx-internal
