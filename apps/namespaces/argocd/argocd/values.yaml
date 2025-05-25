@@ -90,7 +90,7 @@ configs:
       secrets,secrets+literal,
       https
     statusbadge.enabled: true
-    buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm
+    kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm
 
   params:
     server.insecure: true
