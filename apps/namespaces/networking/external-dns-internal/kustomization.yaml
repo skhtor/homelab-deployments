@@ -6,7 +6,7 @@ helmCharts:
   releaseName: external-dns-internal
   namespace: networking
   version: 1.18.0
-  repo: https://kubernetes-sigs.github.io/external-dns/
+  repo: https://kubernetes-sigs.github.io/external-dns
   valuesInline:
     provider: pihole
     policy: upsert-only
