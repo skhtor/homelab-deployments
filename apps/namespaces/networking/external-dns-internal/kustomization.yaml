@@ -5,8 +5,8 @@ helmCharts:
 - name: external-dns
   releaseName: external-dns
   namespace: networking
-  version: 8.8.0
-  repo: https://charts.bitnami.com/bitnami
+  version: 1.18.0
+  repo: https://kubernetes-sigs.github.io/external-dns/
   valuesInline:
     provider: pihole
     policy: upsert-only
