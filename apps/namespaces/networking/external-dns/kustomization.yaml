@@ -56,3 +56,4 @@ helmCharts:
 
 resources:
   - resources/aws-creds.yaml
+  - resources/iamra-cert.yaml
