@@ -4,7 +4,7 @@ metadata:
   name: ca-issuer
 spec:
   ca:
-    secretName: root-ca
+    secretName: homelab-root-ca
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
