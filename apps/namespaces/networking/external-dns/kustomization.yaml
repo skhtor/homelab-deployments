@@ -32,7 +32,7 @@ helmCharts:
         emptyDir: {}
       - name: aws-cert
         secret:
-          secretName: external-dns-cert
+          secretName: external-dns-iamra-cert
     extraContainers:
       - name: aws-signing-helper
         image: public.ecr.aws/aws-iam-roles-anywhere/aws-signing-helper:latest
