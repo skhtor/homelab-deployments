@@ -17,6 +17,5 @@ spec:
     - "client auth"
     - "server auth"
   issuerRef:
-    group: cert-manager.io/v1
     kind: ClusterIssuer
     name: ca-issuer
