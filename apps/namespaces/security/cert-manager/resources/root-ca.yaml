@@ -1,0 +1,32 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: homelab-root-ca
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: op-secret-store
+  data:
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: MyHomelab Root CA
+        metadataPolicy: None
+        property: ca.crt
+      secretKey: ca.crt
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: MyHomelab Root CA
+        metadataPolicy: None
+        property: ca.key
+      secretKey: ca.key
+  target:
+    creationPolicy: Owner
+    template:
+      type: Opaque
+      engineVersion: v2
+      data:
+        ca.crt: "{{ .ca.crt }}"
+        ca.key: "{{ .ca.key }}"
