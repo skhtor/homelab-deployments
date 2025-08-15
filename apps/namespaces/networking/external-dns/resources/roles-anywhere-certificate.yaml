@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: external-dns-iamra-cert
+spec:
+  secretName: external-dns-iamra-cert
+  duration: 168h # 7d
+  renewBefore: 24h # 15d
+  subject:
+    organizations:
+      - "Example Corp."
+    organizationalUnits:
+      - "Admin"
+  commonName: "homelab-ca-issuer"
+  isCA: false
+  usages:
+    - "client auth"
+    - "server auth"
+  issuerRef:
+    group: cert-manager.io/v1
+    kind: ClusterIssuer
+    name: ca-issuer
