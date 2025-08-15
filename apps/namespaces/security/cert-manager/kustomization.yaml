@@ -15,3 +15,4 @@ helmCharts:
 
 resources:
   - ./resources/cluster-issuer.yaml
+  - ./resources/root-ca.yaml
