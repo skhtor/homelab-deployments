@@ -22,13 +22,37 @@ helmCharts:
       - name: AWS_SHARED_CREDENTIALS_FILE
         value: /.aws/credentials
     extraVolumeMounts:
+      - name: aws-cert
+        mountPath: /cert
       - name: aws-credentials
-        mountPath: /.aws
-        readOnly: true
+        mountPath: /shared
 
     extraVolumes:
       - name: aws-credentials
+        emptyDir: {}
+      - name: aws-cert
         secret:
-          secretName: external-dns-aws-creds
+          secretName: external-dns-cert
+    extraContainers:
+      - name: aws-signing-helper
+        image: public.ecr.aws/aws-iam-roles-anywhere/aws-signing-helper:latest
+        command: ["serve"]
+        args:
+          - "--certificate"
+          - "/cert/tls.crt"
+          - "--private-key"
+          - "/cert/tls.key"
+          - "--trust-anchor-arn"
+          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
+          - "--profile-arn"
+          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/2187d12c-919e-470b-be38-16aeb2157319"
+          - "--credentials-path"
+          - "/shared/credentials"
+        volumeMounts:
+          - name: aws-cert
+            mountPath: /cert
+          - name: aws-credentials
+            mountPath: /shared
+
 resources:
   - resources/aws-creds.yaml
