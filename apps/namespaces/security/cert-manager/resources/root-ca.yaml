@@ -14,19 +14,19 @@ spec:
         key: MyHomelab Root CA
         metadataPolicy: None
         property: ca.crt
-      secretKey: ca.crt
+      secretKey: ca_crt
     - remoteRef:
         conversionStrategy: Default
         decodingStrategy: None
         key: MyHomelab Root CA
         metadataPolicy: None
         property: ca.key
-      secretKey: ca.key
+      secretKey: ca_key
   target:
     creationPolicy: Owner
     template:
       type: Opaque
       engineVersion: v2
       data:
-        ca.crt: "{{ .ca.crt }}"
-        ca.key: "{{ .ca.key }}"
+        ca.crt: "{{ .ca_crt }}"
+        ca.key: "{{ .ca_key }}"
