@@ -36,8 +36,8 @@ helmCharts:
     extraContainers:
       - name: aws-signing-helper
         image: public.ecr.aws/rolesanywhere/credential-helper
-        command: ["credential-process"]
         args:
+          - "credential-process"
           - "--certificate"
           - "/cert/tls.crt"
           - "--private-key"
