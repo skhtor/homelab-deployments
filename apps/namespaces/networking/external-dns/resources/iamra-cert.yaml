@@ -20,8 +20,9 @@ spec:
   commonName: "homelab-ca-issuer"
   isCA: false
   usages:
-    - "client auth"
-    - "server auth"
+    - client auth
+    - digital signature
+    - key encipherment
   issuerRef:
     kind: ClusterIssuer
     name: ca-issuer

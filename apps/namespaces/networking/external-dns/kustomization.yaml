@@ -33,6 +33,7 @@ helmCharts:
       - name: aws-cert
         secret:
           secretName: external-dns-iamra-cert
+
     extraContainers:
       - name: aws-signing-helper
         image: public.ecr.aws/rolesanywhere/credential-helper
