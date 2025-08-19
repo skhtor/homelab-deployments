@@ -46,7 +46,8 @@ helmCharts:
           - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
           - "--profile-arn"
           - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/2187d12c-919e-470b-be38-16aeb2157319"
-          - "&& ls -la"
+          - "--role-arn"
+          - "arn:aws:iam::764395739071:role/external-dns-iamra-role"
         volumeMounts:
           - name: aws-cert
             mountPath: /cert
