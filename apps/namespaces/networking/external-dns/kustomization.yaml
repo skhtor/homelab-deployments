@@ -21,6 +21,8 @@ helmCharts:
     env:
       - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
         value: http://127.0.0.1:9911
+      - name: AWS_REGION
+        value: ap-southeast-2
     extraVolumeMounts:
       - name: aws-cert
         mountPath: /cert
