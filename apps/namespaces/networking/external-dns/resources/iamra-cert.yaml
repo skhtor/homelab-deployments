@@ -8,9 +8,15 @@ spec:
   renewBefore: 24h # 15d
   subject:
     organizations:
-      - "Example Corp."
+      - "Homelab"
     organizationalUnits:
       - "Admin"
+    countries:
+      - "AU"
+    localities:
+      - "Melbourne"
+    provinces:
+      - "VIC"
   commonName: "homelab-ca-issuer"
   isCA: false
   usages:
