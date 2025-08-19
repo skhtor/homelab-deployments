@@ -19,8 +19,8 @@ helmCharts:
       domain-filter: sass.sh
       ingress-class: nginx-internal
     env:
-      - name: AWS_SHARED_CREDENTIALS_FILE
-        value: /.aws/credentials
+      - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
+        value: http://127.0.0.1:9911
     extraVolumeMounts:
       - name: aws-cert
         mountPath: /cert
@@ -38,7 +38,7 @@ helmCharts:
       - name: aws-signing-helper
         image: public.ecr.aws/rolesanywhere/credential-helper
         args:
-          - "credential-process"
+          - "serve"
           - "--certificate"
           - "/cert/tls.crt"
           - "--private-key"
