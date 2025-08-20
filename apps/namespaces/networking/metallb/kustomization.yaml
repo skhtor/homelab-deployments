@@ -5,7 +5,7 @@ helmCharts:
 - name: metallb
   releaseName: metallb
   namespace: networking
-  version: 0.14.9
+  version: 0.15.2
   repo: https://metallb.github.io/metallb
 
 resources:
