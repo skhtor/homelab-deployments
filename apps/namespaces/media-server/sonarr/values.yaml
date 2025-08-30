@@ -20,7 +20,7 @@ service:
     controller: main
     ports:
       http:
-        port: 8989
+        targetPort: 8989
 
 ingress:
   main:
