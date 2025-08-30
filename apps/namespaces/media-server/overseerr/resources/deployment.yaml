@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: overseerr
-        image: lscr.io/linuxserver/overseerr
+        image: sctx/overseerr:develop
         imagePullPolicy: Always
         env:
         - name: PUID
@@ -29,7 +29,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: overseerr-data
-          mountPath: /config
+          mountPath: /app/config
       volumes:
       - name: overseerr-data
         persistentVolumeClaim:
