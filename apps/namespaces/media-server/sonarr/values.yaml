@@ -35,7 +35,7 @@ ingress:
               port: http
 
 persistence:
-  sonarr-data:
+  sonarr:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
     size: 500Mi
