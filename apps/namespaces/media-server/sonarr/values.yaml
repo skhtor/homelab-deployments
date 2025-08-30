@@ -5,7 +5,7 @@ controllers:
   main:
     strategy: RollingUpdate
     containers:
-      main:
+      sonarr:
         image:
           repository: lscr.io/linuxserver/sonarr
           tag: latest
@@ -16,7 +16,7 @@ controllers:
           TZ: Australia/Melbourne
 
 service:
-  main:
+  sonarr:
     controller: main
     ports:
       http:
@@ -24,7 +24,7 @@ service:
         targetPort: 8989
 
 ingress:
-  main:
+  sonarr:
     hosts:
       - host: sonarr.home
         paths:
@@ -35,7 +35,7 @@ ingress:
               port: http
 
 persistence:
-  config:
+  sonarr-data:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
     size: 500Mi
