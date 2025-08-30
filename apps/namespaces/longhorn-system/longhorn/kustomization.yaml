@@ -5,7 +5,7 @@ helmCharts:
 - name: longhorn
   releaseName: longhorn
   namespace: longhorn-system
-  version: 1.8.2
+  version: 1.9.1
   repo: https://charts.longhorn.io
   valuesInline:
     ingress:
