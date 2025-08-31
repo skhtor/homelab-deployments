@@ -35,7 +35,8 @@ ingress:
               port: http
 
 persistence:
-  sonarr-data-pvc:
+  sonarr:
+    existingClaim: sonarr-data-pvc
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
     size: 500Mi
