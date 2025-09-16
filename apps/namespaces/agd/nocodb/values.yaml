@@ -1,0 +1,15 @@
+ingress:
+  main:
+    enabled: true
+    hosts:
+      - host: nocodb.home
+persistence:
+  data:
+    enabled: false
+    size: 10Gi
+postgresql:
+  enabled: true
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
