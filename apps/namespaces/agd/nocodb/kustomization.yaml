@@ -7,17 +7,4 @@ helmCharts:
   namespace: agd
   version: 1.1.0
   repo: https://zekker6.github.io/helm-charts
-  valuesInline:
-    ingress:
-      main:
-        enabled: true
-    persistence:
-      data:
-        enabled: false
-        size: 10Gi
-    postgresql:
-      enabled: true
-      primary:
-        persistence:
-          enabled: true
-          size: 10Gi
+  valuesFile: values.yaml
