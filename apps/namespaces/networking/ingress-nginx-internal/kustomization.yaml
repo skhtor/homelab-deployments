@@ -13,5 +13,5 @@ helmCharts:
         name: nginx-internal
         enabled: true
         default: true
-        controllerValue: "k8s.io/ingress-nginx"
+        controllerValue: "k8s.io/ingress-nginx-internal"
         parameters: {}
