@@ -5,11 +5,13 @@ ingress:
       - host: nocodb.home
         paths:
           - path: /
+persistence:
+  data:
+    enabled: true
+    size: 10Gi
 postgresql:
-  enabled: true
+  enabled: false
   primary:
     persistence:
       enabled: true
       size: 10Gi
-env:
-  NC_DB: 'pg://{{ include "common.names.fullname" . }}-postgresql:5432?u={{ .Values.postgresql.auth.username }}&p={{ .Values.postgresql.auth.password }}&d={{ .Values.postgresql.auth.database }}'
