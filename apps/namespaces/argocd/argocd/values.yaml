@@ -9,8 +9,10 @@ global:
 server:
   ingress:
     enabled: true
-    hosts:
-      - argocd.home
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hostname: argocd.home
+    tls: true
 
 repoServer:
   autoscaling:
