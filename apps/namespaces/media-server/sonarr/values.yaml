@@ -3,7 +3,7 @@ controllers:
   main:
     strategy: RollingUpdate
     containers:
-      {{ .Release.Name }}:
+      "{{ .Release.Name }}":
         image:
           repository: lscr.io/linuxserver/sonarr
           tag: latest
