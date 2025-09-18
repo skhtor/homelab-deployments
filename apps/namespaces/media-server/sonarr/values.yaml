@@ -38,7 +38,6 @@ persistence:
   sonarr-data:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
-    nameOverride: sonarr-data-pvc
     size: 2Gi
     globalMounts:
       - path: /config
