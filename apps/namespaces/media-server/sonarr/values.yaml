@@ -36,8 +36,6 @@ ingress:
 
 persistence:
   config:
-    type: persistentVolumeClaim
-    accessMode: ReadWriteOnce
     existingClaim: sonarr-data-pvc
     globalMounts:
       - path: /config
