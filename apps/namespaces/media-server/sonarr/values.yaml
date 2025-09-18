@@ -2,16 +2,17 @@
 controllers:
   main:
     strategy: RollingUpdate
+    defaultContainerOptions:
+      env:
+        PUID: "1000"
+        PGID: "100"
+        TZ: Australia/Melbourne
     containers:
       "{{ .Release.Name }}":
         image:
           repository: lscr.io/linuxserver/sonarr
           tag: latest
           pullPolicy: Always #IfNotPresent
-        env:
-          PUID: "1000"
-          PGID: "100"
-          TZ: Australia/Melbourne
 
 service:
   main:
