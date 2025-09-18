@@ -18,10 +18,6 @@ controllers:
 service:
   main:
     controller: main
-    ports:
-      http:
-        port: 80
-        targetPort: 8989
 
 ingress:
   main:
