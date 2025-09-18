@@ -16,7 +16,7 @@ controllers:
           TZ: Australia/Melbourne
 
 service:
-  sonarr:
+  main:
     controller: main
     ports:
       http:
@@ -24,7 +24,7 @@ service:
         targetPort: 8989
 
 ingress:
-  sonarr:
+  main:
     hosts:
       - host: sonarr.home
         paths:
@@ -35,7 +35,7 @@ ingress:
               port: http
 
 persistence:
-  data-pvc:
+  main:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
     size: 500Mi
