@@ -31,7 +31,7 @@ ingress:
           - path: /
             pathType: Prefix
             service:
-              identifier: sonarr
+              identifier: main
               port: http
 
 persistence:
