@@ -3,10 +3,9 @@ controllers:
   main:
     strategy: RollingUpdate
     defaultContainerOptions:
-      env:
-        PUID: "1000"
-        PGID: "100"
-        TZ: Australia/Melbourne
+      envFrom:
+        - configMapRef:
+            identifier: common-settings
     containers:
       "{{ .Release.Name }}":
         image:
