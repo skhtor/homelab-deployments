@@ -5,7 +5,7 @@ controllers:
     defaultContainerOptions:
       envFrom:
         - configMapRef:
-            identifier: common-settings
+            name: common-settings
     containers:
       "{{ .Release.Name }}":
         image:
