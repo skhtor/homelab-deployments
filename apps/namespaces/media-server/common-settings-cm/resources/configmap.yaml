@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: game-demo
+  name: common-settings
 data:
   PUID: "1000"
   PGID: "100"
