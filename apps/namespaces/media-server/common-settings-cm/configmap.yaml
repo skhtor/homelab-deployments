@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-demo
+data:
+  PUID: "1000"
+  PGID: "100"
+  TZ: Australia/Melbourne
