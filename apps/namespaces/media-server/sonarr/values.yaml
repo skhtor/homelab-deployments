@@ -38,6 +38,7 @@ persistence:
   sonarr-data:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
+    existingClaim: sonarr-data-pvc
     size: 500Mi
     globalMounts:
       - path: /config
