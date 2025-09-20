@@ -4,10 +4,15 @@ ingress:
     className: nginx
     annotations:
       external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+      cert-manager.io/cluster-issuer: letsencrypt
     hosts:
       - host: nocodb.agd.sass.sh
         paths:
           - path: /
+    tls:
+      - secretName: nocodb-tls
+        hosts:
+          - nocodb.agd.sass.sh
 persistence:
   data:
     enabled: true
