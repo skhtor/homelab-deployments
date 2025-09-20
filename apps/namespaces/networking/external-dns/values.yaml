@@ -9,8 +9,6 @@ extraArgs:
   domain-filter: sass.sh
   ingress-class: nginx
   default-targets: sokh.duckdns.org.
-  publish-internal-services: false
-  publish-host-ip: false
 env:
   - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
     value: http://127.0.0.1:9911
