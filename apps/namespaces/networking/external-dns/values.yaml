@@ -2,13 +2,11 @@ provider:
   name: aws
 policy: upsert-only
 txtOwnerId: "homelab"
-txtPrefix: cname-
 registry: txt
 extraArgs:
   aws-zone-type: public
   domain-filter: sass.sh
   ingress-class: nginx
-  default-targets: sokh.duckdns.org.
 env:
   - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
     value: http://127.0.0.1:9911
