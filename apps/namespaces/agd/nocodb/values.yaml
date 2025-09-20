@@ -1,8 +1,9 @@
 ingress:
   main:
     enabled: true
+    className: nginx
     hosts:
-      - host: nocodb.home
+      - host: nocodb.agd.sass.sh
         paths:
           - path: /
 persistence:
