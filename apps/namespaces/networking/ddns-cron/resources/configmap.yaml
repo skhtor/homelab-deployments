@@ -4,4 +4,9 @@ metadata:
   name: ddns-duckdns-update-script-configmap
 data:
   run.sh: |
-    echo url="https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" | curl -k -K -
+    IP=$(curl -s https://api.ipify.org)
+
+    URL="https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip=${IP}"
+    RESULT=$(curl -s "$URL")
+
+    echo "DuckDNS update result: $RESULT"
