@@ -4,9 +4,20 @@ metadata:
   name: ddns-duckdns-update-script-configmap
 data:
   run.sh: |
-    IP=$(curl -s https://api.ipify.org)
+    #!/usr/bin/env sh
+    set -euo pipefail
 
-    URL="https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip=${IP}"
-    RESULT=$(curl -s "$URL")
+    : "${DOMAIN:?DOMAIN env var is required}"
+    : "${TOKEN:?TOKEN env var is required}"
 
-    echo "DuckDNS update result: $RESULT"
+    URL="https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip="
+
+    RESULT="$(curl -fsS "$URL")" || RESULT="curl-error"
+
+    echo "$(date -Is) DuckDNS update result: ${RESULT}"
+
+    # Optional: basic success check (DuckDNS returns 'OK' on success)
+    if [ "$RESULT" != "OK" ]; then
+      echo "$(date -Is) ERROR: DuckDNS did not return OK" >&2
+      exit 1
+    fi
