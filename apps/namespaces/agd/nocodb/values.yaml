@@ -6,13 +6,13 @@ ingress:
       external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
       cert-manager.io/cluster-issuer: letsencrypt
     hosts:
-      - host: nocodb.agd.sass.sh
+      - host: nocodb.agd.org.au
         paths:
           - path: /
     tls:
       - secretName: nocodb-tls
         hosts:
-          - nocodb.agd.sass.sh
+          - nocodb.agd.org.au
 persistence:
   data:
     enabled: true
