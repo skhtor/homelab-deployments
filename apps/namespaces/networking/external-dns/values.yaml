@@ -1,7 +1,7 @@
 provider:
   name: aws
 
-policy: upsert-only
+policy: sync
 txtOwnerId: "homelab"
 registry: txt
 
