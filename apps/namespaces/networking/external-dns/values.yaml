@@ -1,17 +1,24 @@
 provider:
   name: aws
+
 policy: upsert-only
 txtOwnerId: "homelab"
 registry: txt
+
+domainFilters:
+  - sass.sh
+  - agd.org.au
+
 extraArgs:
   aws-zone-type: public
-  domain-filter: sass.sh
   ingress-class: nginx
+
 env:
   - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
     value: http://127.0.0.1:9911
   - name: AWS_REGION
     value: ap-southeast-2
+
 extraVolumeMounts:
   - name: aws-cert
     mountPath: /cert
@@ -45,4 +52,3 @@ extraContainers:
         mountPath: /cert
       - name: aws-credentials
         mountPath: /shared
-
