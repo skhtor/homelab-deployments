@@ -3,11 +3,14 @@ provider:
 
 policy: sync
 txtOwnerId: "homelab"
+txtPrefix: "cname-"
 registry: txt
 
 domainFilters:
   - sass.sh
   - agd.org.au
+
+managedRecordTypes: [ "CNAME" ]
 
 extraArgs:
   aws-zone-type: public
