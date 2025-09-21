@@ -2,7 +2,8 @@ provider:
   name: aws
 
 policy: sync
-txtOwnerId: "homelab"
+txtOwnerId: homelab
+txtPrefix: cname-
 registry: txt
 
 domainFilters:
@@ -12,6 +13,9 @@ domainFilters:
 extraArgs:
   aws-zone-type: public
   ingress-class: nginx
+  default-targets: sokh.duckdns.org.
+  publish-internal-services: false
+  publish-host-ip: false
 
 env:
   - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
