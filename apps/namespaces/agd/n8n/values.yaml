@@ -6,6 +6,8 @@ ingress:
   className: "nginx"
   hosts:
     - host: n8n.agd.org.au
+      paths:
+        - /
   tls:
     - secretName: n8n-tls
       hosts:
