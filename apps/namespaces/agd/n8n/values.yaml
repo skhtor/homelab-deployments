@@ -12,3 +12,6 @@ ingress:
     - secretName: n8n-tls
       hosts:
         - n8n.agd.org.au
+main:
+  extraEnv:
+    GENERIC_TIMEZONE: Australia/Melbourne
