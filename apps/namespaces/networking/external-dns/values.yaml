@@ -3,7 +3,6 @@ provider:
 
 policy: sync
 txtOwnerId: homelab
-txtPrefix: cname-
 registry: txt
 
 domainFilters:
