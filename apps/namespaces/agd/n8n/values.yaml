@@ -1,0 +1,14 @@
+ingress:
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+    cert-manager.io/cluster-issuer: letsencrypt
+  className: "nginx"
+  hosts:
+    - host: n8n.agd.org.au
+      paths:
+        - path: /
+  tls:
+    - secretName: n8n-tls
+      hosts:
+        - n8n.agd.org.au
