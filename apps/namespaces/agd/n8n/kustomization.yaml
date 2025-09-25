@@ -5,6 +5,6 @@ helmCharts:
 - name: n8n
   releaseName: n8n
   namespace: agd
-  version: 1.1.0
-  repo: oci://8gears.container-registry.com/library/n8n
+  version: 1.0.15
+  repo: oci://8gears.container-registry.com/library
   valuesFile: values.yaml
