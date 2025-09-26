@@ -1,0 +1,46 @@
+---
+controllers:
+  main:
+    strategy: RollingUpdate
+    defaultContainerOptions:
+      envFrom:
+        - configMapRef:
+            name: common-settings
+    containers:
+      "{{ .Release.Name }}":
+        image:
+          repository: lscr.io/linuxserver/prowlarr
+          tag: latest
+          pullPolicy: Always
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 9696
+
+ingress:
+  main:
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    hosts:
+      - host: prowlarr.home
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: prowlarr-tls
+        hosts:
+          - prowlarr.home
+
+persistence:
+  prowlarr-data:
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 500Mi
+    globalMounts:
+      - path: /config
