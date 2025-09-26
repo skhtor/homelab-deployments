@@ -1,0 +1,47 @@
+---
+controllers:
+  main:
+    strategy: RollingUpdate
+    defaultContainerOptions:
+      envFrom:
+        - configMapRef:
+            name: common-settings
+    containers:
+      "{{ .Release.Name }}":
+        image:
+          repository: sctx/overseerr
+          tag: develop
+          pullPolicy: Always
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5055
+
+ingress:
+  main:
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - host: requests.sass.sh
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: overseerr-tls
+        hosts:
+          - requests.sass.sh
+
+persistence:
+  overseerr-data:
+    type: persistentVolumeClaim
+    accessMode: ReadWriteOnce
+    size: 500Mi
+    globalMounts:
+      - path: /app/config
