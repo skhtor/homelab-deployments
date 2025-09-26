@@ -13,6 +13,16 @@ ingress:
       hosts:
         - n8n.agd.org.au
 main:
+  config:
+    db:
+      type: postgresdb
+      postgresdb:
+        host: postgresql:5432
   extraEnv:
+    DB_POSTGRESDB_password:
+      valueFrom:
+        secretKeyRef:
+          name: postgresql
+          key: postgres-password
     GENERIC_TIMEZONE:
       value: Australia/Melbourne
