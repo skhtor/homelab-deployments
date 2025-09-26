@@ -22,6 +22,8 @@ service:
 
 ingress:
   main:
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
     hosts:
       - host: sonarr.home
         paths:
@@ -30,6 +32,10 @@ ingress:
             service:
               identifier: main
               port: http
+    tls:
+      - secretName: sonarr-tls
+        hosts:
+          - sonarr.home
 
 persistence:
   sonarr-data:
