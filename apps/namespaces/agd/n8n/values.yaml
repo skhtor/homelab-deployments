@@ -17,11 +17,11 @@ main:
     db:
       type: postgresdb
       postgresdb:
-        host: postgresql:5432
+        host: postgresql
   extraEnv:
     N8N_DB_POSTGRESDB_NAME:
-      value: primary
-    DB_POSTGRESDB_password:
+      value: n8n
+    DB_POSTGRESDB_PASSWORD:
       valueFrom:
         secretKeyRef:
           name: postgresql
