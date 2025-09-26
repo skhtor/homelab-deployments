@@ -20,7 +20,7 @@ main:
         host: postgresql:5432
   extraEnv:
     N8N_DB_POSTGRESDB_NAME:
-      value: n8n
+      value: primary
     DB_POSTGRESDB_password:
       valueFrom:
         secretKeyRef:
