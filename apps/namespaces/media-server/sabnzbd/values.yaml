@@ -9,7 +9,7 @@ controllers:
     containers:
       "{{ .Release.Name }}":
         image:
-          repository: lscr.io/linuxserver/sonarr
+          repository: lscr.io/linuxserver/sabnzbd
           tag: latest
           pullPolicy: Always
 
@@ -18,14 +18,14 @@ service:
     controller: main
     ports:
       http:
-        port: 8989
+        port: 8080
 
 ingress:
   main:
     annotations:
       cert-manager.io/cluster-issuer: ca-issuer
     hosts:
-      - host: sonarr.home
+      - host: sabnzbd.home
         paths:
           - path: /
             pathType: Prefix
@@ -33,18 +33,19 @@ ingress:
               identifier: main
               port: http
     tls:
-      - secretName: sonarr-tls
+      - secretName: sabnzbd-tls
         hosts:
-          - sonarr.home
+          - sabnzbd.home
 
 persistence:
-  sonarr-data:
+  sabnzbd-data:
     type: persistentVolumeClaim
     accessMode: ReadWriteOnce
-    size: 2Gi
+    size: 10Gi
     globalMounts:
       - path: /config
   nfs-media:
     existingClaim: media-server-nfs-pvc
     globalMounts:
-      - path: /media
+      - path: /media/downloads/usenet
+        subPath: downloads/usenet
