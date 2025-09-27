@@ -21,7 +21,7 @@ main:
   extraEnv:
     N8N_DB_POSTGRESDB_NAME:
       value: primary
-    DB_POSTGRESDB_PASSWORD:
+    DB_POSTGRESDB_password:
       valueFrom:
         secretKeyRef:
           name: postgresql
