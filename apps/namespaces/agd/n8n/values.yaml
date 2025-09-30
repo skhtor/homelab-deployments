@@ -13,18 +13,9 @@ ingress:
       hosts:
         - n8n.agd.org.au
 main:
-  config:
-    db:
-      type: postgresdb
-      postgresdb:
-        host: postgresql
+  persistence:
+    enabled: true
+    size: 5Gi
   extraEnv:
-    N8N_DB_POSTGRESDB_NAME:
-      value: primary
-    DB_POSTGRESDB_PASSWORD:
-      valueFrom:
-        secretKeyRef:
-          name: postgresql
-          key: postgres-password
     GENERIC_TIMEZONE:
       value: Australia/Melbourne
