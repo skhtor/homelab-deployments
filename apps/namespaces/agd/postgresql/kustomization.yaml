@@ -8,3 +8,5 @@ helmCharts:
   version: 16.7.27
   repo: oci://registry-1.docker.io/bitnamicharts
   valuesFile: values.yaml
+  additionalValuesFiles:
+    - values.sops.yaml
