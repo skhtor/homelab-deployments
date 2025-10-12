@@ -48,15 +48,23 @@ repoServer:
       value: /usr/local/bin/helm
     - name: HELM_SECRETS_IGNORE_MISSING_VALUES
       value: "true"
+    - name: SOPS_AGE_KEY_FILE
+      value: /keys/age.agekey
   volumes:
     - name: custom-tools
       emptyDir: {}
+    - name: sops-age
+      secret:
+        secretName: argocd-sops-age
   volumeMounts:
     - mountPath: /custom-tools
       name: custom-tools
     - mountPath: /usr/local/sbin/helm
       subPath: helm
       name: custom-tools
+    - name: argocd-sops-age
+      mountPath: /keys
+      readOnly: true
 
   initContainers:
     - name: download-tools
