@@ -13,12 +13,6 @@ ingress:
       - secretName: nocodb-tls
         hosts:
           - nocodb.agd.org.au
-env:
-  NC_DB:
-    valueFrom:
-      secretKeyRef:
-        name: nocodb-postgres-creds
-        key: NC_DB
 persistence:
   data:
     enabled: true
