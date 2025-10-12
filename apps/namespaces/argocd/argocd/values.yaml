@@ -53,7 +53,7 @@ repoServer:
   volumes:
     - name: custom-tools
       emptyDir: {}
-    - name: sops-age
+    - name: argocd-sops-age
       secret:
         secretName: argocd-sops-age
   volumeMounts:
