@@ -16,8 +16,6 @@ main:
   persistence:
     enabled: true
     size: 5Gi
-    labels:
-      recurring-job-group.longhorn.io/default: enabled
   extraEnv:
     GENERIC_TIMEZONE:
       value: Australia/Melbourne
