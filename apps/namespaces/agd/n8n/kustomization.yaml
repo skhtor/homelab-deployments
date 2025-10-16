@@ -16,5 +16,5 @@ patches:
       name: n8n
     patch: |-
       - op: add
-        path: /metadata/labels/recurring-job-group.longhorn.io/default
+        path: /metadata/labels/recurring-job-group.longhorn.io~1default
         value: "enabled"
