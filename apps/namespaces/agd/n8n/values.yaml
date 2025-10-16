@@ -15,6 +15,7 @@ ingress:
 main:
   persistence:
     enabled: true
+    type: dynamic
     size: 5Gi
   extraEnv:
     GENERIC_TIMEZONE:
