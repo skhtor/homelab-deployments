@@ -8,6 +8,6 @@ helmCharts:
 - name: nocodb
   releaseName: nocodb
   namespace: agd
-  version: 1.1.0
+  version: 1.4.0
   repo: https://zekker6.github.io/helm-charts
   valuesFile: values.yaml
