@@ -8,13 +8,3 @@ helmCharts:
   version: 1.0.15
   repo: oci://8gears.container-registry.com/library
   valuesFile: values.yaml
-
-patches:
-  - target:
-      version: v1
-      kind: PersistentVolumeClaim
-      name: n8n
-    patch: |-
-      - op: add
-        path: /metadata/labels/recurring-job-group.longhorn.io~1default
-        value: "enabled"
