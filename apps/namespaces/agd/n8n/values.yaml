@@ -19,4 +19,4 @@ main:
     size: 5Gi
   extraEnv:
     GENERIC_TIMEZONE:
-      value: Australia/Melbourne
+      value: Australia/Sydney
