@@ -20,3 +20,5 @@ main:
   extraEnv:
     GENERIC_TIMEZONE:
       value: Australia/Sydney
+    WEBHOOK_URL:
+      value: https://n8n.agd.org.au/
