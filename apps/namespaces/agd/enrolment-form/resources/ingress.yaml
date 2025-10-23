@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: enrollment-form
+  annotations:
+    external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - enroll.agd.org.au
+    secretName: enrollment-form-tls
+  rules:
+  - host: enroll.agd.org.au
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: enrollment-form
+            port:
+              number: 80

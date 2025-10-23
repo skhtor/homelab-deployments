@@ -1,0 +1,378 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: enrollment-form-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en-AU">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AGD Enrolment - Azad Gharibian Dance</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #f5f7fa; padding: 20px; }
+            .container { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; }
+            .header-logo { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 20px; overflow: hidden; border: 4px solid rgba(255,255,255,0.3); background: white; padding: 10px; }
+            .header-logo img { width: 100%; height: 100%; object-fit: contain; }
+            .header h1 { font-size: 28px; margin-bottom: 8px; }
+            .header p { opacity: 0.9; font-size: 14px; }
+            .progress-bar { height: 4px; background: rgba(255,255,255,0.3); }
+            .progress-fill { height: 100%; background: white; transition: width 0.3s; }
+            .content { padding: 40px; }
+            .step { display: none; }
+            .step.active { display: block; animation: fadeIn 0.3s; }
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .form-group { margin-bottom: 20px; }
+            .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+            label { display: block; margin-bottom: 6px; font-weight: 500; color: #333; font-size: 14px; }
+            label .required { color: #e74c3c; }
+            input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; transition: border 0.2s; }
+            input:focus, textarea:focus, select:focus { outline: none; border-color: #667eea; }
+            textarea { resize: vertical; min-height: 80px; }
+            .radio-group { display: flex; gap: 20px; margin-bottom: 30px; }
+            .radio-option { flex: 1; padding: 20px; border: 2px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; }
+            .radio-option:hover { border-color: #667eea; background: #f8f9fa; }
+            .radio-option.selected { border-color: #667eea; background: #f0f2ff; }
+            .radio-option input[type="radio"] { display: none; }
+            .radio-option .radio-header { display: flex; align-items: center; margin-bottom: 8px; }
+            .radio-option .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; margin-right: 10px; position: relative; transition: all 0.2s; }
+            .radio-option.selected .radio-circle { border-color: #667eea; }
+            .radio-option.selected .radio-circle::after { content: ''; position: absolute; width: 10px; height: 10px; background: #667eea; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+            .radio-option .radio-label { font-weight: 500; font-size: 16px; }
+            .radio-option .radio-desc { font-size: 13px; color: #6c757d; margin-left: 30px; }
+            .checkbox-group { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding: 12px; background: #f8f9fa; border-radius: 6px; cursor: pointer; }
+            .checkbox-group input[type="checkbox"] { width: auto; cursor: pointer; }
+            .checkbox-group label { margin: 0; cursor: pointer; font-weight: 400; }
+            .student-card { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 20px; position: relative; }
+            .student-card h3 { margin-bottom: 15px; color: #495057; font-size: 16px; }
+            .student-card.prefilled { border-color: #667eea; background: #f0f2ff; }
+            .prefill-badge { display: inline-block; background: #667eea; color: white; font-size: 11px; padding: 3px 8px; border-radius: 4px; margin-left: 8px; }
+            .remove-student { position: absolute; top: 15px; right: 15px; background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+            .remove-student:hover { background: #c82333; }
+            .add-student-btn { background: #28a745; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; width: 100%; margin-top: 10px; }
+            .add-student-btn:hover { background: #218838; }
+            .button-group { display: flex; gap: 12px; margin-top: 30px; }
+            .btn { flex: 1; padding: 14px; border: none; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+            .btn-primary { background: #667eea; color: white; }
+            .btn-primary:hover { background: #5568d3; }
+            .btn-secondary { background: #e9ecef; color: #495057; }
+            .btn-secondary:hover { background: #dee2e6; }
+            .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+            .review-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+            .review-section h3 { margin-bottom: 12px; color: #495057; font-size: 16px; }
+            .review-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e9ecef; }
+            .review-item:last-child { border-bottom: none; }
+            .review-label { font-weight: 500; color: #6c757d; }
+            .review-value { color: #212529; }
+            .success-message { text-align: center; padding: 40px; }
+            .success-message .icon { font-size: 64px; color: #28a745; margin-bottom: 20px; }
+            .success-message h2 { color: #28a745; margin-bottom: 12px; }
+            .success-message p { color: #6c757d; }
+            .error { color: #dc3545; font-size: 13px; margin-top: 4px; display: none; }
+            .form-group.invalid input, .form-group.invalid select, .form-group.invalid textarea { border-color: #dc3545; }
+            .form-group.invalid .error { display: block; }
+            .helper-text { font-size: 13px; color: #6c757d; margin-top: 8px; font-style: italic; }
+            .info-box { background: #e7f3ff; border-left: 4px solid #2196F3; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+            .info-box p { color: #1976D2; font-size: 14px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="header-logo">
+                    <img src="https://scontent-syd2-1.xx.fbcdn.net/v/t39.30808-6/475763560_1723792281522619_9221774894964798433_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=BCCPNy9BNkYQ7kNvwEe7LS6&_nc_oc=AdkPao8Ke1T-5WQxkK16aWRmJGR4eVe7VZyAEznVGQ85pJ1kZlHIj7A9zyh9FuIdFcs&_nc_zt=23&_nc_ht=scontent-syd2-1.xx&_nc_gid=eYBEs7TtFCLuxsfWYbcq8g&oh=00_Aff5e7b2YYsVgZrDZZg4EZI8zMxt329uuL_DMdq8i9LIVg&oe=68FA17E7" alt="AGD Logo">
+                </div>
+                <h1>Azad Gharibian Dance</h1>
+                <p>Armenian Folkloric Dance Group - Enrolment Form</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+            </div>
+            
+            <div class="content">
+                <div class="step active" id="step0">
+                    <h2 style="margin-bottom: 24px; color: #333;">Select Option</h2>
+                    <div class="radio-group">
+                        <div class="radio-option" id="newAccountOption" onclick="selectAccountType('new')">
+                            <input type="radio" name="accountType" id="newAccount" value="new">
+                            <div class="radio-header">
+                                <div class="radio-circle"></div>
+                                <span class="radio-label">Create New Account</span>
+                            </div>
+                            <p class="radio-desc">Register for the first time</p>
+                        </div>
+                        <div class="radio-option" id="existingAccountOption" onclick="selectAccountType('existing')">
+                            <input type="radio" name="accountType" id="existingAccount" value="existing">
+                            <div class="radio-header">
+                                <div class="radio-circle"></div>
+                                <span class="radio-label">Add to Existing Account</span>
+                            </div>
+                            <p class="radio-desc">Add a family member</p>
+                        </div>
+                    </div>
+                    <div class="button-group"><button class="btn btn-primary" onclick="startEnrolment()" id="startBtn" disabled>Continue →</button></div>
+                </div>
+                
+                <div class="step" id="stepLookup">
+                    <h2 style="margin-bottom: 24px; color: #333;">Find Your Account</h2>
+                    <div class="info-box"><p>Enter your email or mobile to find your account</p></div>
+                    <div class="form-group"><label>Email or Mobile <span class="required">*</span></label><input type="text" id="lookupValue" required placeholder="email@example.com or 04XX XXX XXX"><div class="error">This field is required</div></div>
+                    <div class="button-group"><button class="btn btn-secondary" onclick="backToStart()">← Back</button><button class="btn btn-primary" onclick="lookupFamily()">Find Account →</button></div>
+                </div>
+    
+                <div class="step" id="step1">
+                    <h2 style="margin-bottom: 24px; color: #333;">Your Information</h2>
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name <span class="required">*</span></label><input type="text" id="firstName" required><div class="error">This field is required</div></div>
+                        <div class="form-group"><label>Last Name <span class="required">*</span></label><input type="text" id="lastName" required><div class="error">This field is required</div></div>
+                    </div>
+                    <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" id="contactEmail" required><div class="error">Please enter a valid email</div></div>
+                    <div class="form-group"><label>Mobile <span class="required">*</span></label><input type="tel" id="contactPhone" required placeholder="04XX XXX XXX"><div class="error">Please enter a valid Australian mobile number</div></div>
+                    <div class="form-group"><label>Street Address <span class="required">*</span></label><input type="text" id="street" required placeholder="123 Main Street"><div class="error">This field is required</div></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Suburb <span class="required">*</span></label><input type="text" id="suburb" required><div class="error">This field is required</div></div>
+                        <div class="form-group"><label>State <span class="required">*</span></label><select id="state" required><option value="">Select</option><option value="NSW">NSW</option><option value="VIC">VIC</option><option value="QLD">QLD</option><option value="SA">SA</option><option value="WA">WA</option><option value="TAS">TAS</option><option value="NT">NT</option><option value="ACT">ACT</option></select><div class="error">Please select a state</div></div>
+                    </div>
+                    <div class="form-group"><label>Postcode <span class="required">*</span></label><input type="text" id="postcode" required pattern="[0-9]{4}" maxlength="4" placeholder="2000"><div class="error">Please enter a valid 4-digit postcode</div></div>
+                    <div class="form-group"><label>Payment Plan <span class="required">*</span></label><select id="paymentPlan" required><option value="">Select a plan</option><option value="Annual">Annual</option><option value="Half-annual">Half-annual</option><option value="Quarterly">Quarterly</option><option value="Casual">Casual</option></select><div class="error">Please select a payment plan</div></div>
+                    <div class="button-group"><button class="btn btn-secondary" onclick="backToStart()">← Back</button><button class="btn btn-primary" onclick="nextStep()">Next: Add Members →</button></div>
+                </div>
+                
+                <div class="step" id="step2">
+                    <h2 style="margin-bottom: 24px; color: #333;">Members to Enrol</h2>
+                    <div class="checkbox-group" onclick="toggleSelfEnroll()" id="selfEnrollBox" style="display: none;">
+                        <input type="checkbox" id="selfEnrollCheck" onchange="toggleSelfEnroll()">
+                        <label for="selfEnrollCheck">I am enrolling myself</label>
+                    </div>
+                    <div id="studentsContainer"></div>
+                    <button class="add-student-btn" onclick="addStudent()">+ Add Family Member</button>
+                    <div class="button-group"><button class="btn btn-secondary" onclick="prevStep()">← Back</button><button class="btn btn-primary" onclick="nextStep()">Review & Submit →</button></div>
+                </div>
+                
+                <div class="step" id="step3">
+                    <h2 style="margin-bottom: 24px; color: #333;">Review Your Information</h2>
+                    <div class="review-section" id="reviewFamilySection"><h3>Contact & Billing</h3><div id="reviewFamily"></div></div>
+                    <div class="review-section"><h3>Members</h3><div id="reviewStudents"></div></div>
+                    <div class="button-group"><button class="btn btn-secondary" onclick="prevStep()">← Back</button><button class="btn btn-primary" onclick="submitForm()" id="submitBtn">Create Account</button></div>
+                </div>
+                
+                <div class="step" id="stepSuccess">
+                    <div class="success-message"><div class="icon">✓</div><h2>Success!</h2><p id="successMessage">Thank you for registering with Azad Gharibian Dance. We'll be in touch soon.</p></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let currentStep = 0, studentCount = 0, accountType = null, existingAccountId = null;
+            window.onload = () => {};
+            
+            function selectAccountType(type) {
+                accountType = type;
+                document.getElementById('newAccount').checked = (type === 'new');
+                document.getElementById('existingAccount').checked = (type === 'existing');
+                document.getElementById('newAccountOption').classList.toggle('selected', type === 'new');
+                document.getElementById('existingAccountOption').classList.toggle('selected', type === 'existing');
+                document.getElementById('startBtn').disabled = false;
+            }
+            
+            function startEnrolment() {
+                if (!accountType) return;
+                document.getElementById('step0').classList.remove('active');
+                if (accountType === 'new') {
+                    currentStep = 1;
+                    document.getElementById('step1').classList.add('active');
+                    document.getElementById('selfEnrollBox').style.display = 'flex';
+                } else {
+                    currentStep = 0.5;
+                    document.getElementById('stepLookup').classList.add('active');
+                    document.getElementById('selfEnrollBox').style.display = 'none';
+                }
+                updateProgress();
+            }
+            
+            function backToStart() {
+                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+                document.getElementById('step0').classList.add('active');
+                currentStep = 0;
+                existingAccountId = null;
+                updateProgress();
+            }
+            
+            async function lookupFamily() {
+                const lookup = document.getElementById('lookupValue').value.trim();
+                if (!lookup) { alert('Please enter email or mobile'); return; }
+                
+                try {
+                    const response = await fetch(window.location.href, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'lookup', lookup })
+                    });
+                    const result = await response.json();
+                    
+                    if (result.found) {
+                        existingAccountId = result.accountId;
+                        document.getElementById('stepLookup').classList.remove('active');
+                        currentStep = 2;
+                        document.getElementById('step2').classList.add('active');
+                        updateProgress();
+                    } else {
+                        alert('Account not found. Please check your details or create a new account.');
+                    }
+                } catch (error) {
+                    alert('Error looking up account. Please try again.');
+                }
+            }
+            
+            function toggleSelfEnroll() {
+                const checkbox = document.getElementById('selfEnrollCheck');
+                if (checkbox.checked && studentCount === 0) {
+                    addStudent(true);
+                }
+            }
+            
+            function addStudent(prefill = false) {
+                studentCount++;
+                const container = document.getElementById('studentsContainer');
+                const studentCard = document.createElement('div');
+                studentCard.className = 'student-card' + (prefill ? ' prefilled' : '');
+                studentCard.id = `student${studentCount}`;
+                const isPrefilled = prefill && studentCount === 1;
+                studentCard.innerHTML = `<h3>Member ${studentCount}${isPrefilled ? '<span class="prefill-badge">You</span>' : ''}</h3>${studentCount > 1 ? '<button class="remove-student" onclick="removeStudent(' + studentCount + ')">Remove</button>' : ''}<div class="form-row"><div class="form-group"><label>First Name <span class="required">*</span></label><input type="text" id="s${studentCount}FirstName" required ${isPrefilled ? 'value="' + document.getElementById('firstName').value + '"' : ''}><div class="error">This field is required</div></div><div class="form-group"><label>Last Name <span class="required">*</span></label><input type="text" id="s${studentCount}LastName" required ${isPrefilled ? 'value="' + document.getElementById('lastName').value + '"' : ''}><div class="error">This field is required</div></div></div><div class="form-group"><label>Date of Birth <span class="required">*</span></label><input type="date" id="s${studentCount}Dob" required><div class="error">This field is required</div></div><div class="form-row"><div class="form-group"><label>Email</label><input type="email" id="s${studentCount}Email" ${isPrefilled ? 'value="' + document.getElementById('contactEmail').value + '"' : ''}><div class="error">Please enter a valid email</div></div><div class="form-group"><label>Mobile</label><input type="tel" id="s${studentCount}Mobile" placeholder="04XX XXX XXX" ${isPrefilled ? 'value="' + document.getElementById('contactPhone').value + '"' : ''}><div class="error">Please enter a valid Australian mobile number</div></div></div><div class="form-group"><label>Emergency Contact <span class="required">*</span></label><input type="text" id="s${studentCount}Emergency" required><div class="error">This field is required</div></div>`;
+                container.appendChild(studentCard);
+            }
+            
+            function removeStudent(id) { document.getElementById(`student${id}`).remove(); }
+            
+            function validateStep(step) {
+                let valid = true;
+                const stepEl = document.getElementById(`step${step}`);
+                const inputs = stepEl.querySelectorAll('input[required], select[required], textarea[required]');
+                inputs.forEach(input => {
+                    const formGroup = input.closest('.form-group');
+                    if (!input.value.trim()) { formGroup.classList.add('invalid'); valid = false; }
+                    else if (input.type === 'email' && input.value.trim() && !input.value.trim().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { formGroup.classList.add('invalid'); valid = false; }
+                    else if (input.type === 'tel' && input.value.trim() && !input.value.trim().replace(/\s/g, '').match(/^04\d{8}$/)) { formGroup.classList.add('invalid'); valid = false; }
+                    else if (input.pattern && input.value.trim() && !new RegExp(input.pattern).test(input.value.trim())) { formGroup.classList.add('invalid'); valid = false; }
+                    else { formGroup.classList.remove('invalid'); }
+                });
+                const optionalTels = stepEl.querySelectorAll('input[type="tel"]:not([required])');
+                optionalTels.forEach(input => {
+                    const formGroup = input.closest('.form-group');
+                    if (input.value.trim() && !input.value.trim().replace(/\s/g, '').match(/^04\d{8}$/)) { formGroup.classList.add('invalid'); valid = false; }
+                    else if (!input.value.trim() || input.value.trim().replace(/\s/g, '').match(/^04\d{8}$/)) { formGroup.classList.remove('invalid'); }
+                });
+                return valid;
+            }
+            
+            function nextStep() {
+                if (currentStep === 1 && !validateStep(1)) return;
+                if (currentStep === 2 && studentCount === 0) { alert('Please add at least one member'); return; }
+                if (currentStep === 2) showReview();
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep++;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                updateProgress();
+            }
+            
+            function prevStep() {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep--;
+                if (currentStep === 0.5) {
+                    document.getElementById('stepLookup').classList.add('active');
+                } else {
+                    document.getElementById(`step${currentStep}`).classList.add('active');
+                }
+                updateProgress();
+            }
+            
+            function updateProgress() {
+                const totalSteps = existingAccountId ? 3 : 4;
+                const progress = ((currentStep === 0.5 ? 1 : currentStep) / totalSteps) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+            }
+            
+            function formatDateAU(dateStr) {
+                if (!dateStr) return 'N/A';
+                const [y, m, d] = dateStr.split('-');
+                return `${d}/${m}/${y}`;
+            }
+            
+            function showReview() {
+                if (existingAccountId) {
+                    document.getElementById('reviewFamilySection').style.display = 'none';
+                } else {
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const street = document.getElementById('street').value;
+                    const suburb = document.getElementById('suburb').value;
+                    const state = document.getElementById('state').value;
+                    const postcode = document.getElementById('postcode').value;
+                    document.getElementById('reviewFamily').innerHTML = `<div class="review-item"><span class="review-label">Name:</span><span class="review-value">${firstName} ${lastName}</span></div><div class="review-item"><span class="review-label">Email:</span><span class="review-value">${document.getElementById('contactEmail').value}</span></div><div class="review-item"><span class="review-label">Mobile:</span><span class="review-value">${document.getElementById('contactPhone').value}</span></div><div class="review-item"><span class="review-label">Address:</span><span class="review-value">${street}, ${suburb} ${state} ${postcode}</span></div><div class="review-item"><span class="review-label">Payment Plan:</span><span class="review-value">${document.getElementById('paymentPlan').value}</span></div>`;
+                }
+                
+                let studentsReview = '';
+                for (let i = 1; i <= studentCount; i++) {
+                    const card = document.getElementById(`student${i}`);
+                    if (!card) continue;
+                    const fName = document.getElementById(`s${i}FirstName`)?.value;
+                    const lName = document.getElementById(`s${i}LastName`)?.value;
+                    if (!fName || !lName) continue;
+                    studentsReview += `<div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #dee2e6;"><strong>Member ${i}: ${fName} ${lName}</strong><br><small>DOB: ${formatDateAU(document.getElementById(`s${i}Dob`)?.value)}</small><br><small>Emergency: ${document.getElementById(`s${i}Emergency`)?.value || 'N/A'}</small></div>`;
+                }
+                document.getElementById('reviewStudents').innerHTML = studentsReview;
+            }
+            
+            async function submitForm() {
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Creating...';
+                
+                const students = [];
+                for (let i = 1; i <= studentCount; i++) {
+                    const card = document.getElementById(`student${i}`);
+                    if (!card) continue;
+                    const fName = document.getElementById(`s${i}FirstName`)?.value;
+                    const lName = document.getElementById(`s${i}LastName`)?.value;
+                    if (!fName || !lName) continue;
+                    students.push({ firstName: fName, lastName: lName, dob: document.getElementById(`s${i}Dob`)?.value, email: document.getElementById(`s${i}Email`)?.value, mobile: document.getElementById(`s${i}Mobile`)?.value, emergencyContact: document.getElementById(`s${i}Emergency`)?.value });
+                }
+                
+                const data = { action: 'enrol', students };
+                
+                if (existingAccountId) {
+                    data.accountId = existingAccountId;
+                } else {
+                    const street = document.getElementById('street').value;
+                    const suburb = document.getElementById('suburb').value;
+                    const state = document.getElementById('state').value;
+                    const postcode = document.getElementById('postcode').value;
+                    data.account = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        contactEmail: document.getElementById('contactEmail').value,
+                        contactPhone: document.getElementById('contactPhone').value,
+                        billingAddress: `${street}, ${suburb} ${state} ${postcode}`,
+                        paymentPlan: document.getElementById('paymentPlan').value
+                    };
+                }
+                
+                try {
+                    const response = await fetch(window.location.href, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                    if (response.ok) {
+                        document.getElementById('step3').classList.remove('active');
+                        document.getElementById('stepSuccess').classList.add('active');
+                        document.getElementById('successMessage').textContent = existingAccountId ? 'Family member added successfully to Azad Gharibian Dance!' : 'Thank you for registering with Azad Gharibian Dance. We\'ll be in touch soon.';
+                        updateProgress();
+                    }
+                } catch (error) {
+                    alert('Error creating account. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Create Account';
+                }
+            }
+        </script>
+    </body>
+    </html>
