@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: enrollment-form
+  name: enrolment-form
 spec:
   replicas: 2
   selector:

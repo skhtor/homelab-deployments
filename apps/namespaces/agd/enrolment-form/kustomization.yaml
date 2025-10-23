@@ -10,4 +10,4 @@ resources:
   - resources/ingress.yaml
 
 commonLabels:
-  app: enrollment-form
+  app: enrolment-form
