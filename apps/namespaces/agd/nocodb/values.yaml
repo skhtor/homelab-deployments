@@ -1,18 +1,17 @@
 ingress:
   main:
     enabled: true
-    ingressClassName: nginx
+    ingressClassName: nginx-internal
     annotations:
-      external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
-      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/cluster-issuer: ca-issuer
     hosts:
-      - host: nocodb.agd.org.au
+      - host: nocodb.agd.home
         paths:
           - path: /
     tls:
       - secretName: nocodb-tls
         hosts:
-          - nocodb.agd.org.au
+          - nocodb.agd.home
 env:
   NC_DB:
     valueFrom:
