@@ -6,11 +6,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: enrollment-form
+      app: enrolment-form
   template:
     metadata:
       labels:
-        app: enrollment-form
+        app: enrolment-form
     spec:
       containers:
       - name: nginx
@@ -31,4 +31,4 @@ spec:
       volumes:
       - name: html
         configMap:
-          name: enrollment-form-html
+          name: enrolment-form-html
