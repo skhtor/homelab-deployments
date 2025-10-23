@@ -8,17 +8,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - enroll.agd.org.au
-    secretName: enrollment-form-tls
+    - hosts:
+        - enroll.agd.org.au
+      secretName: enrolment-form-tls
   rules:
-  - host: enroll.agd.org.au
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: enrollment-form
-            port:
-              number: 80
+    - host: enroll.agd.org.au
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: enrolment-form
+                port:
+                  number: 80
