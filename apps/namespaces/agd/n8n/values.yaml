@@ -1,11 +1,10 @@
 ingress:
   enabled: true
   annotations:
-    external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
-    cert-manager.io/cluster-issuer: letsencrypt
-  className: "nginx"
+    cert-manager.io/cluster-issuer: ca-issuer
+  className: nginx-internal
   hosts:
-    - host: n8n.agd.org.au
+    - host: n8n.agd.home
       paths:
         - /
   tls:
@@ -22,3 +21,30 @@ main:
       value: Australia/Sydney
     WEBHOOK_URL:
       value: https://n8n.agd.org.au/
+
+extraManifests:
+  - |
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+      name: n8n-webhook
+    spec:
+      ingressClassName: nginx
+      rules:
+        - host: n8n.agd.org.au
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: n8n
+                    port:
+                      number: 80
+                path: /webhook
+                pathType: Prefix
+      tls:
+        - hosts:
+            - n8n.agd.org.au
+          secretName: n8n-tls
