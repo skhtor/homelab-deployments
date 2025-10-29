@@ -10,7 +10,7 @@ ingress:
   tls:
     - secretName: n8n-tls
       hosts:
-        - n8n.agd.org.au
+        - n8n.agd.home
 main:
   persistence:
     enabled: true
