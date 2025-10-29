@@ -360,7 +360,7 @@ data:
                 }
                 
                 try {
-                    const response = await fetch(window.location.href, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                    const response = await fetch('https://n8n.agd.org.au/webhook/enrolments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
                     if (response.ok) {
                         document.getElementById('step3').classList.remove('active');
                         document.getElementById('stepSuccess').classList.add('active');
