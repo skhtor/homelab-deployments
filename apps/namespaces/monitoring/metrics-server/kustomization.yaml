@@ -5,5 +5,5 @@ helmCharts:
 - name: metrics-server
   releaseName: metrics-server
   namespace: monitoring
-  version: 3.12.2
+  version: 3.13.0
   repo: https://kubernetes-sigs.github.io/metrics-server/
