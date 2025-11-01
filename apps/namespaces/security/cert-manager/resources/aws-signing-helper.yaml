@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-signing-helper
+  namespace: security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aws-signing-helper
+  template:
+    metadata:
+      labels:
+        app: aws-signing-helper
+    spec:
+      containers:
+      - name: aws-signing-helper
+        image: public.ecr.aws/rolesanywhere/credential-helper
+        args:
+          - "serve"
+          - "--certificate"
+          - "/cert/tls.crt"
+          - "--private-key"
+          - "/cert/tls.key"
+          - "--trust-anchor-arn"
+          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
+          - "--profile-arn"
+          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/49efa586-0f54-45c2-a9cb-8216cb73a620"
+          - "--role-arn"
+          - "arn:aws:iam::764395739071:role/cert-manager-iamra-role"
+        ports:
+        - containerPort: 9911
+        volumeMounts:
+          - name: aws-cert
+            mountPath: /cert
+      volumes:
+        - name: aws-cert
+          secret:
+            secretName: cert-manager-iamra-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-signing-helper
+  namespace: security
+spec:
+  selector:
+    app: aws-signing-helper
+  ports:
+  - port: 9911
+    targetPort: 9911

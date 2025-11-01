@@ -14,41 +14,11 @@ helmCharts:
     installCRDs: true
     extraEnv:
       - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
-        value: http://127.0.0.1:9911
+        value: http://aws-signing-helper.security.svc.cluster.local:9911
       - name: AWS_REGION
         value: ap-southeast-2
-    volumeMounts:
-      - name: aws-cert
-        mountPath: /cert
-      - name: aws-credentials
-        mountPath: /shared
-    volumes:
-      - name: aws-credentials
-        emptyDir: {}
-      - name: aws-cert
-        secret:
-          secretName: cert-manager-iamra-cert
-    extraContainers:
-      - name: aws-signing-helper
-        image: public.ecr.aws/rolesanywhere/credential-helper
-        args:
-          - "serve"
-          - "--certificate"
-          - "/cert/tls.crt"
-          - "--private-key"
-          - "/cert/tls.key"
-          - "--trust-anchor-arn"
-          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
-          - "--profile-arn"
-          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/49efa586-0f54-45c2-a9cb-8216cb73a620"
-          - "--role-arn"
-          - "arn:aws:iam::764395739071:role/cert-manager-iamra-role"
-        volumeMounts:
-          - name: aws-cert
-            mountPath: /cert
-          - name: aws-credentials
-            mountPath: /shared
 
 resources:
   - ./resources/cluster-issuer.yaml
   - ./resources/root-ca.yaml
+  - ./resources/aws-signing-helper.yaml
