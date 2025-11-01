@@ -30,7 +30,7 @@ extraManifests:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
-      name: n8n-webhook
+      name: n8n-public
     spec:
       ingressClassName: nginx
       rules:
