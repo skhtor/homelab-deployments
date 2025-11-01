@@ -18,6 +18,10 @@ spec:
         image: public.ecr.aws/rolesanywhere/credential-helper
         args:
           - "serve"
+          - "--port"
+          - "9911"
+          - "--bind"
+          - "0.0.0.0"
           - "--certificate"
           - "/cert/tls.crt"
           - "--private-key"
