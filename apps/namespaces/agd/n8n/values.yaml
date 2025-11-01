@@ -28,7 +28,6 @@ extraManifests:
     kind: Ingress
     metadata:
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
       name: n8n-public
     spec:
@@ -54,4 +53,4 @@ extraManifests:
       tls:
         - hosts:
             - n8n.agd.org.au
-          secretName: n8n-tls
+          secretName: agd-tls

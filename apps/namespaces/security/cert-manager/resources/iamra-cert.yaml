@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-manager-iamra-cert
+spec:
+  secretName: cert-manager-iamra-cert
+  duration: 720h # 30 days
+  renewBefore: 168h # 7 days
+  subject:
+    organizations:
+      - "Homelab"
+    organizationalUnits:
+      - "Admin"
+    countries:
+      - "AU"
+    localities:
+      - "Melbourne"
+    provinces:
+      - "VIC"
+  commonName: "cert-manager-iamra-cert"
+  isCA: false
+  usages:
+    - client auth
+    - digital signature
+    - key encipherment
+  issuerRef:
+    kind: ClusterIssuer
+    name: ca-issuer
+
