@@ -12,14 +12,11 @@ helmCharts:
       leaderElection:
         namespace: security
     installCRDs: true
-    extraEnv:
-      - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
-        value: http://aws-signing-helper.security.svc.cluster.local:9911
-      - name: AWS_REGION
-        value: ap-southeast-2
 
 resources:
-  - ./resources/aws-signing-helper.yaml
   - ./resources/cluster-issuer.yaml
-  - ./resources/iamra-cert.yaml
   - ./resources/root-ca.yaml
+  - ./resources/iamra-cert.yaml
+
+patches:
+  - path: patches/sidecar.yaml
