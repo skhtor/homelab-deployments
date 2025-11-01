@@ -44,6 +44,13 @@ extraManifests:
                       number: 80
                 path: /webhook
                 pathType: Prefix
+              - backend:
+                  service:
+                    name: n8n
+                    port:
+                      number: 80
+                path: /rest/oauth2-credential/callback
+                pathType: Exact
       tls:
         - hosts:
             - n8n.agd.org.au
