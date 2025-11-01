@@ -17,10 +17,10 @@ spec:
       - "Melbourne"
     provinces:
       - "VIC"
-    commonName: "agd"
+  commonName: "agd"
   dnsNames:
-    - agd.org.au
-    - *.agd.org.au
+    - "agd.org.au"
+    - "*.agd.org.au"
   isCA: false
   usages:
     - client auth
