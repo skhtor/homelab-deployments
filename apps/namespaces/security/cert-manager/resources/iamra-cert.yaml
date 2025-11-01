@@ -26,4 +26,3 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: ca-issuer
-
