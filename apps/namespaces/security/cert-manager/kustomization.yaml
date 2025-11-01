@@ -19,6 +19,7 @@ helmCharts:
         value: ap-southeast-2
 
 resources:
-  - ./resources/cluster-issuer.yaml
-  - ./resources/root-ca.yaml
   - ./resources/aws-signing-helper.yaml
+  - ./resources/cluster-issuer.yaml
+  - ./resources/iamra-cert.yaml
+  - ./resources/root-ca.yaml
