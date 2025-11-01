@@ -17,12 +17,12 @@ helmCharts:
         value: http://127.0.0.1:9911
       - name: AWS_REGION
         value: ap-southeast-2
-    extraVolumeMounts:
+    volumeMounts:
       - name: aws-cert
         mountPath: /cert
       - name: aws-credentials
         mountPath: /shared
-    extraVolumes:
+    volumes:
       - name: aws-credentials
         emptyDir: {}
       - name: aws-cert
