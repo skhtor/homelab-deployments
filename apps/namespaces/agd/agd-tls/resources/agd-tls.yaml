@@ -17,7 +17,7 @@ spec:
       - "Melbourne"
     provinces:
       - "VIC"
-  commonName: "agd"
+  commonName: "agd.org.au"
   dnsNames:
     - "agd.org.au"
     - "*.agd.org.au"
