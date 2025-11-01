@@ -19,4 +19,4 @@ resources:
   - ./resources/iamra-cert.yaml
 
 patches:
-  - path: patches/sidecar.yaml
+  - path: patches/aws-signing-helper-sidecar.yaml
