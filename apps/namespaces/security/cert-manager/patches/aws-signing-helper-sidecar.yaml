@@ -1,42 +1,41 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: cert-manager
-  namespace: security
-spec:
-  template:
-    spec:
-      containers:
-      - name: cert-manager
-        image: quay.io/jetstack/cert-manager-controller:v1.19.1
-        args:
-        - --leader-election-namespace=security
-        env:
-        - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
-          value: http://127.0.0.1:9911
-        - name: AWS_REGION
-          value: ap-southeast-2
-        volumeMounts:
-        - name: aws-cert
-          mountPath: /cert
-      - name: aws-signing-helper
-        image: public.ecr.aws/rolesanywhere/credential-helper
-        args:
-          - "serve"
-          - "--certificate"
-          - "/cert/tls.crt"
-          - "--private-key"
-          - "/cert/tls.key"
-          - "--trust-anchor-arn"
-          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
-          - "--profile-arn"
-          - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/49efa586-0f54-45c2-a9cb-8216cb73a620"
-          - "--role-arn"
-          - "arn:aws:iam::764395739071:role/cert-manager-iamra-role"
-        volumeMounts:
-        - name: aws-cert
-          mountPath: /cert
-      volumes:
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: AWS_EC2_METADATA_SERVICE_ENDPOINT
+    value: http://127.0.0.1:9911
+- op: add
+  path: /spec/template/spec/containers/0/env/-
+  value:
+    name: AWS_REGION
+    value: ap-southeast-2
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts/-
+  value:
+    name: aws-cert
+    mountPath: /cert
+- op: add
+  path: /spec/template/spec/containers/-
+  value:
+    name: aws-signing-helper
+    image: public.ecr.aws/rolesanywhere/credential-helper
+    args:
+      - "serve"
+      - "--certificate"
+      - "/cert/tls.crt"
+      - "--private-key"
+      - "/cert/tls.key"
+      - "--trust-anchor-arn"
+      - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:trust-anchor/1180e313-3e11-4cf3-9b7b-44cdcda8e251"
+      - "--profile-arn"
+      - "arn:aws:rolesanywhere:ap-southeast-2:764395739071:profile/49efa586-0f54-45c2-a9cb-8216cb73a620"
+      - "--role-arn"
+      - "arn:aws:iam::764395739071:role/cert-manager-iamra-role"
+    volumeMounts:
       - name: aws-cert
-        secret:
-          secretName: cert-manager-iamra-cert
+        mountPath: /cert
+- op: add
+  path: /spec/template/spec/volumes/-
+  value:
+    name: aws-cert
+    secret:
+      secretName: cert-manager-iamra-cert
