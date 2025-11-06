@@ -9,6 +9,12 @@
     name: AWS_REGION
     value: ap-southeast-2
 - op: add
+  path: /spec/template/spec/volumes
+  value:
+    - name: aws-cert
+      secret:
+        secretName: cert-manager-iamra-cert
+- op: add
   path: /spec/template/spec/containers/-
   value:
     name: aws-signing-helper
@@ -28,9 +34,3 @@
     volumeMounts:
       - name: aws-cert
         mountPath: /cert
-- op: add
-  path: /spec/template/spec/volumes/-
-  value:
-    name: aws-cert
-    secret:
-      secretName: cert-manager-iamra-cert
