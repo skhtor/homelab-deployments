@@ -9,11 +9,6 @@
     name: AWS_REGION
     value: ap-southeast-2
 - op: add
-  path: /spec/template/spec/containers/0/volumeMounts/-
-  value:
-    name: aws-cert
-    mountPath: /cert
-- op: add
   path: /spec/template/spec/containers/-
   value:
     name: aws-signing-helper
