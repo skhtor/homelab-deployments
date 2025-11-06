@@ -4,13 +4,12 @@ metadata:
   name: enrolment-form
   annotations:
     external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
-    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
         - enroll.agd.org.au
-      secretName: enrolment-form-tls
+      secretName: agd-tls
   rules:
     - host: enroll.agd.org.au
       http:
