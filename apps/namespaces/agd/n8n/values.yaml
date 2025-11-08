@@ -49,7 +49,7 @@ extraManifests:
                     port:
                       number: 80
                 path: /rest/oauth2-credential/callback
-                pathType: Exact
+                pathType: Prefix
       tls:
         - hosts:
             - n8n.agd.org.au
