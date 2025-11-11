@@ -108,26 +108,10 @@ data:
             
             <div class="content">
                 <div class="step active" id="step0">
-                    <h2 style="margin-bottom: 24px; color: #333;">Select Option</h2>
-                    <div class="radio-group">
-                        <div class="radio-option" id="newAccountOption" onclick="selectAccountType('new')">
-                            <input type="radio" name="accountType" id="newAccount" value="new">
-                            <div class="radio-header">
-                                <div class="radio-circle"></div>
-                                <span class="radio-label">Create New Account</span>
-                            </div>
-                            <p class="radio-desc">Register for the first time</p>
-                        </div>
-                        <div class="radio-option" id="existingAccountOption" onclick="selectAccountType('existing')">
-                            <input type="radio" name="accountType" id="existingAccount" value="existing">
-                            <div class="radio-header">
-                                <div class="radio-circle"></div>
-                                <span class="radio-label">Add to Existing Account</span>
-                            </div>
-                            <p class="radio-desc">Add a family member</p>
-                        </div>
-                    </div>
-                    <div class="button-group"><button class="btn btn-primary" onclick="startEnrolment()" id="startBtn" disabled>Continue →</button></div>
+                    <h2 style="margin-bottom: 24px; color: #333;">Enter Your Email</h2>
+                    <div class="info-box"><p>We'll check if you have an existing account or create a new one</p></div>
+                    <div class="form-group"><label>Email Address <span class="required">*</span></label><input type="email" id="emailLookup" required placeholder="email@example.com"><div class="error">Please enter a valid email</div></div>
+                    <div class="button-group"><button class="btn btn-primary" onclick="checkEmail()">Continue →</button></div>
                 </div>
                 
                 <div class="step" id="stepLookup">
@@ -181,28 +165,40 @@ data:
             let currentStep = 0, studentCount = 0, accountType = null, existingAccountId = null;
             window.onload = () => {};
             
-            function selectAccountType(type) {
-                accountType = type;
-                document.getElementById('newAccount').checked = (type === 'new');
-                document.getElementById('existingAccount').checked = (type === 'existing');
-                document.getElementById('newAccountOption').classList.toggle('selected', type === 'new');
-                document.getElementById('existingAccountOption').classList.toggle('selected', type === 'existing');
-                document.getElementById('startBtn').disabled = false;
-            }
-            
-            function startEnrolment() {
-                if (!accountType) return;
-                document.getElementById('step0').classList.remove('active');
-                if (accountType === 'new') {
-                    currentStep = 1;
-                    document.getElementById('step1').classList.add('active');
-                    document.getElementById('selfEnrollBox').style.display = 'flex';
-                } else {
-                    currentStep = 0.5;
-                    document.getElementById('stepLookup').classList.add('active');
-                    document.getElementById('selfEnrollBox').style.display = 'none';
+            async function checkEmail() {
+                const email = document.getElementById('emailLookup').value.trim();
+                if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                    alert('Please enter a valid email address');
+                    return;
                 }
-                updateProgress();
+                
+                try {
+                    const response = await fetch('https://n8n.agd.org.au/webhook/enrolments', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'lookup', lookup: email })
+                    });
+                    const result = await response.json();
+                    
+                    document.getElementById('step0').classList.remove('active');
+                    
+                    if (result.found) {
+                        existingAccountId = result.accountId;
+                        accountType = 'existing';
+                        currentStep = 2;
+                        document.getElementById('step2').classList.add('active');
+                        document.getElementById('selfEnrollBox').style.display = 'none';
+                    } else {
+                        accountType = 'new';
+                        currentStep = 1;
+                        document.getElementById('step1').classList.add('active');
+                        document.getElementById('contactEmail').value = email;
+                        document.getElementById('selfEnrollBox').style.display = 'flex';
+                    }
+                    updateProgress();
+                } catch (error) {
+                    alert('Error checking email. Please try again.');
+                }
             }
             
             function backToStart() {
@@ -210,33 +206,9 @@ data:
                 document.getElementById('step0').classList.add('active');
                 currentStep = 0;
                 existingAccountId = null;
+                accountType = null;
+                document.getElementById('emailLookup').value = '';
                 updateProgress();
-            }
-            
-            async function lookupFamily() {
-                const lookup = document.getElementById('lookupValue').value.trim();
-                if (!lookup) { alert('Please enter email or mobile'); return; }
-                
-                try {
-                    const response = await fetch(window.location.href, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ action: 'lookup', lookup })
-                    });
-                    const result = await response.json();
-                    
-                    if (result.found) {
-                        existingAccountId = result.accountId;
-                        document.getElementById('stepLookup').classList.remove('active');
-                        currentStep = 2;
-                        document.getElementById('step2').classList.add('active');
-                        updateProgress();
-                    } else {
-                        alert('Account not found. Please check your details or create a new account.');
-                    }
-                } catch (error) {
-                    alert('Error looking up account. Please try again.');
-                }
             }
             
             function toggleSelfEnroll() {
@@ -333,7 +305,7 @@ data:
                     const fName = document.getElementById(`s${i}FirstName`)?.value;
                     const lName = document.getElementById(`s${i}LastName`)?.value;
                     if (!fName || !lName) continue;
-                    studentsReview += `<div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #dee2e6;"><strong>Member ${i}: ${fName} ${lName}</strong><br><small>DOB: ${formatDateAU(document.getElementById(`s${i}Dob`)?.value)}</small><br><small>Emergency: ${document.getElementById(`s${i}Emergency`)?.value || 'N/A'}</small></div>`;
+                    studentsReview += `<div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #dee2e6;"><strong>Member ${i}: ${fName} ${lName}</strong><br><small>DOB: ${formatDateAU(document.getElementById(`s${i}Dob`)?.value)}</small><br><small>Emergency: ${document.getElementById(`s${i}EmergencyName`)?.value || 'N/A'} - ${document.getElementById(`s${i}EmergencyNumber`)?.value || 'N/A'}</small></div>`;
                 }
                 document.getElementById('reviewStudents').innerHTML = studentsReview;
             }
