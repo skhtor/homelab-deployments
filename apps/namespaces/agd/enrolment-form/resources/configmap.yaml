@@ -29,7 +29,7 @@ data:
             .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
             label { display: block; margin-bottom: 6px; font-weight: 500; color: #333; font-size: 14px; }
             label .required { color: #e74c3c; }
-            input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; transition: border 0.2s; }
+            input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; transition: border 0.2s; }
             input:focus, textarea:focus, select:focus { outline: none; border-color: #667eea; }
             textarea { resize: vertical; min-height: 80px; }
             .radio-group { display: flex; gap: 20px; margin-bottom: 30px; }
