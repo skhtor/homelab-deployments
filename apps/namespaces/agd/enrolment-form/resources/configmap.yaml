@@ -178,10 +178,13 @@ data:
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ action: 'lookup', lookup: email })
                     });
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        alert('Error checking email: ' + (errorText || response.statusText));
+                        return;
+                    }
                     const result = await response.json();
-                    
                     document.getElementById('step0').classList.remove('active');
-                    
                     if (result.found) {
                         existingAccountId = result.accountId;
                         accountType = 'existing';
@@ -197,7 +200,7 @@ data:
                     }
                     updateProgress();
                 } catch (error) {
-                    alert('Error checking email. Please try again.');
+                    alert('Error checking email: ' + error.message);
                 }
             }
             
