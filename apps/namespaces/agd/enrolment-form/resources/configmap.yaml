@@ -378,9 +378,14 @@ data:
                         document.getElementById('stepSuccess').classList.add('active');
                         document.getElementById('successMessage').textContent = existingAccountId ? 'Family member added successfully to Azad Gharibian Dance!' : 'Thank you for registering with Azad Gharibian Dance. We\'ll be in touch soon.';
                         updateProgress();
+                    } else {
+                        const errorText = await response.text();
+                        alert('Error creating account: ' + (errorText || response.statusText));
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Create Account';
                     }
                 } catch (error) {
-                    alert('Error creating account. Please try again.');
+                    alert('Error creating account: ' + error.message);
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Create Account';
                 }
