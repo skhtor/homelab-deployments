@@ -328,11 +328,13 @@ data:
                     students.push({ firstName: fName, lastName: lName, dob: document.getElementById(`s${i}Dob`)?.value, email: document.getElementById(`s${i}Email`)?.value, mobile: document.getElementById(`s${i}Mobile`)?.value, emergencyContactName: document.getElementById(`s${i}EmergencyName`)?.value, emergencyContactNumber: document.getElementById(`s${i}EmergencyNumber`)?.value, medicalConditions: document.getElementById(`s${i}Medical`)?.value });
                 }
                 
-                const data = { action: 'enrol', students };
+                const data = { students };
                 
                 if (existingAccountId) {
+                    data.action = 'addToExisting';
                     data.accountId = existingAccountId;
                 } else {
+                    data.action = 'enrol';
                     const street = document.getElementById('street').value;
                     const suburb = document.getElementById('suburb').value;
                     const state = document.getElementById('state').value;
