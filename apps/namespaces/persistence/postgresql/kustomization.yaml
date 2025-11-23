@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
 - name: postgresql
   releaseName: postgresql
-  namespace: agd
+  namespace: persistence
   version: 18.1.3
   repo: oci://registry-1.docker.io/bitnamicharts
   valuesFile: values.yaml
