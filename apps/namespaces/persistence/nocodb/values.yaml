@@ -1,0 +1,24 @@
+ingress:
+  main:
+    enabled: true
+    ingressClassName: nginx-internal
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    hosts:
+      - host: nocodb.home
+        paths:
+          - path: /
+    tls:
+      - secretName: nocodb-tls
+        hosts:
+          - nocodb.home
+env:
+  NC_DB:
+    valueFrom:
+      secretKeyRef:
+        name: nocodb-postgres-creds
+        key: NC_DB
+persistence:
+  data:
+    enabled: true
+    size: 10Gi
