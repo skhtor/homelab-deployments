@@ -89,14 +89,15 @@ repoServer:
 
 configs:
   cm:
-    url: http://argocd.home
+    applicationsetcontroller.enable.policy.override: "true"
     helm.valuesFileSchemes: >-
       secrets+gpg-import, secrets+gpg-import-kubernetes,
       secrets+age-import, secrets+age-import-kubernetes,
       secrets,secrets+literal,
       https
-    statusbadge.enabled: true
     kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm
+    statusbadge.enabled: true
+    url: http://argocd.home
 
   params:
     server.insecure: true
