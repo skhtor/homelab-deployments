@@ -32,7 +32,7 @@ spec:
 
       # Sync policy
       syncPolicy:
-        preserveResourcesOnDeletion: true
+        applicationsSync: create-update
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
