@@ -1,0 +1,56 @@
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: ca-issuer
+  className: nginx-internal
+  hosts:
+    - host: n8n.home
+      paths:
+        - /
+  tls:
+    - secretName: n8n-tls
+      hosts:
+        - n8n.home
+main:
+  persistence:
+    enabled: true
+    type: dynamic
+    size: 5Gi
+  extraEnv:
+    GENERIC_TIMEZONE:
+      value: Australia/Sydney
+#     WEBHOOK_URL:
+#       value: https://n8n.sass.sh/
+#
+# extraManifests:
+#   - |
+#     apiVersion: networking.k8s.io/v1
+#     kind: Ingress
+#     metadata:
+#       annotations:
+#         external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+#       name: n8n-public
+#     spec:
+#       ingressClassName: nginx
+#       rules:
+#         - host: n8n.sass.sh
+#           http:
+#             paths:
+#               - backend:
+#                   service:
+#                     name: n8n
+#                     port:
+#                       number: 80
+#                 path: /webhook
+#                 pathType: Prefix
+#               - backend:
+#                   service:
+#                     name: n8n
+#                     port:
+#                       number: 80
+#                 path: /rest/oauth2-credential/callback
+#                 pathType: Prefix
+#       tls:
+#         - hosts:
+#             - n8n.sass.sh
+#           secretName: sass-tls
