@@ -12,6 +12,8 @@ spec:
         revision: HEAD
         directories:
           - path: apps/namespaces/*/*
+  syncPolicy:
+    applicationsSync: create-update
   template:
     metadata:
       name: '{{ .path.basename }}'
@@ -32,7 +34,6 @@ spec:
 
       # Sync policy
       syncPolicy:
-        applicationsSync: create-update
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
