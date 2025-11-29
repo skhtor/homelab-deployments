@@ -48,6 +48,6 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: foosball-db-secret
+              name: foosball-elo-db-secret
               key: DATABASE_URL
   backoffLimit: 3
