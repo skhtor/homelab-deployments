@@ -6,7 +6,7 @@ helmCharts:
     repo: https://bjw-s-labs.github.io/helm-charts/
     version: 4.4.0
     releaseName: &releaseName foosball-elo-api
-    namespace: &releaseNamespace personal
+    namespace: &releaseNamespace foosball-elo
     valuesFile: values.yaml
 resources:
   - resources/external-secret.yaml
