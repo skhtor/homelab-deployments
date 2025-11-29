@@ -10,6 +10,7 @@ helmCharts:
     valuesFile: values.yaml
 resources:
   - resources/external-secret.yaml
+  - resources/migration-job.yaml
 commonAnnotations:
   meta.helm.sh/release-name: *releaseName
   meta.helm.sh/release-namespace: *releaseNamespace
