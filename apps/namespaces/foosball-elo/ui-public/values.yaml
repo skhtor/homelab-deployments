@@ -25,9 +25,6 @@ service:
 
 ingress:
   main:
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
     className: nginx
     hosts:
       - host: foosball.sass.sh
@@ -48,6 +45,6 @@ ingress:
               identifier: main
               port: http
     tls:
-      - secretName: foosball-public-tls
+      - secretName: sass-tls
         hosts:
           - foosball.sass.sh
