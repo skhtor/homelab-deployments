@@ -1,0 +1,53 @@
+---
+controllers:
+  main:
+    strategy: RollingUpdate
+    containers:
+      "{{ .Release.Name }}":
+        image:
+          repository: ghcr.io/skhtor/foosball-elo-frontend-public
+          tag: latest
+          pullPolicy: Always
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 50m
+          limits:
+            memory: 64Mi
+            cpu: 100m
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 80
+
+ingress:
+  main:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+    className: nginx
+    hosts:
+      - host: foosball.sass.sh
+        paths:
+          - path: /api/leaderboard
+            pathType: Prefix
+            service:
+              name: foosball-elo-api
+              port: 8080
+          - path: /api/players
+            pathType: Prefix
+            service:
+              name: foosball-elo-api
+              port: 8080
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: foosball-public-tls
+        hosts:
+          - foosball.sass.sh
