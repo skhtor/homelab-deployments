@@ -1,0 +1,32 @@
+controllers:
+  main:
+    strategy: RollingUpdate
+    containers:
+      "{{ .Release.Name }}":
+        image:
+          repository: ghcr.io/skhtor/aichallenge
+          tag: latest
+          pullPolicy: Always
+        args: ["python", "-u", "worker.py"]
+        env:
+          - name: DATABASE_URL
+            value: postgresql://ants:ants@postgresql.aichallenge.svc.cluster.local:5432/ants
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 200m
+          limits:
+            memory: 512Mi
+            cpu: "1"
+
+persistence:
+  bots:
+    type: persistentVolumeClaim
+    existingClaim: aichallenge-web-bots
+    globalMounts:
+      - path: /app/server/bots
+  replays:
+    type: persistentVolumeClaim
+    existingClaim: aichallenge-web-replays
+    globalMounts:
+      - path: /app/server/replays

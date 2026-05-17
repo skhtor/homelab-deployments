@@ -1,0 +1,78 @@
+controllers:
+  main:
+    strategy: RollingUpdate
+    containers:
+      "{{ .Release.Name }}":
+        image:
+          repository: ghcr.io/skhtor/aichallenge
+          tag: latest
+          pullPolicy: Always
+        args: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]
+        env:
+          - name: DATABASE_URL
+            value: postgresql://ants:ants@postgresql.aichallenge.svc.cluster.local:5432/ants
+        probes:
+          liveness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /health
+                port: 5000
+              initialDelaySeconds: 10
+              periodSeconds: 30
+          readiness:
+            enabled: true
+            custom: true
+            spec:
+              httpGet:
+                path: /health
+                port: 5000
+              initialDelaySeconds: 5
+              periodSeconds: 10
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
+          limits:
+            memory: 256Mi
+            cpu: 500m
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5000
+
+ingress:
+  main:
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    hosts:
+      - host: ants.home
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: aichallenge-tls
+        hosts:
+          - ants.home
+
+persistence:
+  bots:
+    type: persistentVolumeClaim
+    accessMode: ReadWriteMany
+    size: 5Gi
+    globalMounts:
+      - path: /app/server/bots
+  replays:
+    type: persistentVolumeClaim
+    accessMode: ReadWriteMany
+    size: 10Gi
+    globalMounts:
+      - path: /app/server/replays
