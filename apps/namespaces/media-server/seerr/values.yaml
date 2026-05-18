@@ -1,0 +1,21 @@
+---
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+  hosts:
+    - host: requests.sass.sh
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: seerr-tls
+      hosts:
+        - requests.sass.sh
+
+config:
+  persistence:
+    size: 500Mi
+    storageClass: longhorn
