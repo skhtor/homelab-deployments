@@ -1,16 +1,5 @@
 ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: ca-issuer
-  className: nginx-internal
-  hosts:
-    - host: n8n.home
-      paths:
-        - /
-  tls:
-    - secretName: n8n-tls
-      hosts:
-        - n8n.home
+  enabled: false
 main:
   persistence:
     enabled: true

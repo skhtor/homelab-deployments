@@ -23,28 +23,27 @@ service:
       http:
         port: 80
 
-ingress:
+route:
   main:
-    className: nginx
-    hosts:
-      - host: foosball.sass.sh
-        paths:
-          - path: /api/leaderboard
-            pathType: Prefix
-            service:
-              name: foosball-elo-api
-              port: 8080
-          - path: /api/players
-            pathType: Prefix
-            service:
-              name: foosball-elo-api
-              port: 8080
-          - path: /
-            pathType: Prefix
-            service:
-              identifier: main
-              port: http
-    tls:
-      - secretName: sass-tls
-        hosts:
-          - foosball.sass.sh
+    enabled: true
+    parentRefs:
+      - name: public
+        namespace: networking
+        sectionName: https
+    hostnames:
+      - foosball.sass.sh
+    additionalRules:
+      - backendRefs:
+          - name: foosball-elo-api
+            port: 8080
+        matches:
+          - path:
+              type: PathPrefix
+              value: /api/leaderboard
+      - backendRefs:
+          - name: foosball-elo-api
+            port: 8080
+        matches:
+          - path:
+              type: PathPrefix
+              value: /api/players

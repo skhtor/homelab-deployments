@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+resources:
+- ./resources/httproute.yaml
+
 helmCharts:
 - name: gotify
   releaseName: gotify
@@ -11,12 +14,7 @@ helmCharts:
     server:
       timezone: Australia/Melbourne
     ingress:
-      enabled: true
-      hosts:
-        - host: gotify.home
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+      enabled: false
     persistence:
       enabled: true
       size: 10Gi

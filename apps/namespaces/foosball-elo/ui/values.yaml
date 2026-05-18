@@ -23,24 +23,20 @@ service:
       http:
         port: 80
 
-ingress:
+route:
   main:
-    annotations:
-      cert-manager.io/cluster-issuer: ca-issuer
-    hosts:
-      - host: foosball.home
-        paths:
-          - path: /api
-            pathType: Prefix
-            service:
-              name: foosball-elo-api
-              port: 8080
-          - path: /
-            pathType: Prefix
-            service:
-              identifier: main
-              port: http
-    tls:
-      - secretName: foosball-tls
-        hosts:
-          - foosball.home
+    enabled: true
+    parentRefs:
+      - name: internal
+        namespace: networking
+        sectionName: https
+    hostnames:
+      - foosball.home
+    additionalRules:
+      - backendRefs:
+          - name: foosball-elo-api
+            port: 8080
+        matches:
+          - path:
+              type: PathPrefix
+              value: /api

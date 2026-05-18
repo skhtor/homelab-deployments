@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nocodb
+  namespace: persistence
+spec:
+  parentRefs:
+    - name: internal
+      namespace: networking
+      sectionName: https
+  hostnames:
+    - nocodb.home
+  rules:
+    - backendRefs:
+        - name: nocodb
+          port: 8080

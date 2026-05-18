@@ -1,17 +1,6 @@
 ingress:
   main:
-    enabled: true
-    ingressClassName: nginx-internal
-    annotations:
-      cert-manager.io/cluster-issuer: ca-issuer
-    hosts:
-      - host: nocodb.home
-        paths:
-          - path: /
-    tls:
-      - secretName: nocodb-tls
-        hosts:
-          - nocodb.home
+    enabled: false
 env:
   NC_DB:
     valueFrom:

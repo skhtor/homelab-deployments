@@ -8,11 +8,7 @@ global:
 
 server:
   ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: ca-issuer
-    hostname: argocd.home
-    tls: true
+    enabled: false
 
 repoServer:
   autoscaling:

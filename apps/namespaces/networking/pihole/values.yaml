@@ -3,16 +3,7 @@ DNS1:
 persistentVolumeClaim:
   enabled: true
 ingress:
-  enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: ca-issuer
-  hosts:
-    - pihole.home
-  path: /
-  tls:
-    - secretName: pihole-tls
-      hosts:
-        - pihole.home
+  enabled: false
 serviceWeb:
   loadBalancerIP: 192.168.20.250
   annotations:

@@ -20,22 +20,15 @@ service:
       http:
         port: 8989
 
-ingress:
+route:
   main:
-    annotations:
-      cert-manager.io/cluster-issuer: ca-issuer
-    hosts:
-      - host: sonarr.home
-        paths:
-          - path: /
-            pathType: Prefix
-            service:
-              identifier: main
-              port: http
-    tls:
-      - secretName: sonarr-tls
-        hosts:
-          - sonarr.home
+    enabled: true
+    parentRefs:
+      - name: internal
+        namespace: networking
+        sectionName: https
+    hostnames:
+      - sonarr.home
 
 persistence:
   sonarr-data:
