@@ -9,11 +9,11 @@
     name: AWS_REGION
     value: ap-southeast-2
 - op: add
-  path: /spec/template/spec/volumes
+  path: /spec/template/spec/volumes/-
   value:
-    - name: aws-cert
-      secret:
-        secretName: cert-manager-iamra-cert
+    name: aws-cert
+    secret:
+      secretName: cert-manager-iamra-cert
 - op: add
   path: /spec/template/spec/containers/-
   value:
