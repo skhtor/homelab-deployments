@@ -18,7 +18,7 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
-    - name: https-wildcard
+    - name: https
       hostname: "*.home"
       protocol: HTTPS
       port: 443
