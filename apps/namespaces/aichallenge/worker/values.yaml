@@ -18,11 +18,11 @@ controllers:
             value: postgresql://ants:$(DB_PASSWORD)@postgresql.aichallenge.svc.cluster.local:5432/ants
         resources:
           requests:
-            memory: 256Mi
-            cpu: 200m
-          limits:
             memory: 512Mi
-            cpu: "1"
+            cpu: 500m
+          limits:
+            memory: 1Gi
+            cpu: "4"
 
 persistence:
   bots:
