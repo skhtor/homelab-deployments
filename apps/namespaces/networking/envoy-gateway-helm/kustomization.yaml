@@ -16,5 +16,6 @@ commonLabels:
   app.kubernetes.io/managed-by: Helm
 resources:
   - resources/gatewayclass.yaml
+  - resources/envoy-proxy-config.yaml
   - resources/gateway-public.yaml
   - resources/gateway-internal.yaml
