@@ -5,6 +5,8 @@ ingress:
 route:
   main:
     enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
     hostnames:
       - requests.sass.sh
     parentRefs:
