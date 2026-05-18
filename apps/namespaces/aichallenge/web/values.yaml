@@ -1,6 +1,9 @@
 controllers:
   main:
     strategy: RollingUpdate
+    pod:
+      securityContext:
+        fsGroup: 999
     containers:
       "{{ .Release.Name }}":
         image:
