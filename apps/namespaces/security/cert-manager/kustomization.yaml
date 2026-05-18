@@ -12,17 +12,18 @@ helmCharts:
       leaderElection:
         namespace: security
     installCRDs: true
+    featureGates: ExperimentalGatewayAPISupport=true
 
 resources:
   - ./resources/cluster-issuer.yaml
   - ./resources/root-ca.yaml
   - ./resources/iamra-cert.yaml
 
-# patchesJson6902:
-#   - target:
-#       group: apps
-#       version: v1
-#       kind: Deployment
-#       name: cert-manager
-#       namespace: security
-#     path: patches/aws-signing-helper-sidecar.yaml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: cert-manager
+      namespace: security
+    path: patches/aws-signing-helper-sidecar.yaml

@@ -17,10 +17,6 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-cert
     solvers:
-      - http01:
-          ingress:
-            ingressClassName: nginx
-            ingressTemplate:
-              metadata:
-                annotations:
-                  external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
+      - dns01:
+          route53:
+            region: ap-southeast-2
