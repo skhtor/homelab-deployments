@@ -59,11 +59,11 @@ route:
   main:
     enabled: true
     parentRefs:
-      - name: internal
+      - name: public
         namespace: networking
         sectionName: https
     hostnames:
-      - ants.sass.home
+      - ants.sass.sh
 
 persistence:
   bots:
