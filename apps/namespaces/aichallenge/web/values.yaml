@@ -58,6 +58,8 @@ service:
 route:
   main:
     enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/target: sokh.duckdns.org
     parentRefs:
       - name: public
         namespace: networking
