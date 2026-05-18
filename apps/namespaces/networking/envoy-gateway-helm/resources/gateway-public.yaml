@@ -11,7 +11,7 @@ spec:
   gatewayClassName: eg
   addresses:
     - type: IPAddress
-      value: 192.168.20.192
+      value: 192.168.20.196
   listeners:
     - name: http
       protocol: HTTP
