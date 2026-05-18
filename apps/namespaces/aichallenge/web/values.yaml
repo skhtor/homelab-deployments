@@ -9,8 +9,13 @@ controllers:
           pullPolicy: Always
         args: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5000"]
         env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: password
           - name: DATABASE_URL
-            value: postgresql://ants:ants@postgresql.aichallenge.svc.cluster.local:5432/ants
+            value: postgresql://ants:$(DB_PASSWORD)@postgresql.aichallenge.svc.cluster.local:5432/ants
         probes:
           liveness:
             enabled: true
