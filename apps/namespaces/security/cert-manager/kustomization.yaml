@@ -12,7 +12,10 @@ helmCharts:
       leaderElection:
         namespace: security
     installCRDs: true
-    featureGates: ExperimentalGatewayAPISupport=true
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true
 
 resources:
   - ./resources/cluster-issuer.yaml
