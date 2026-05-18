@@ -11,8 +11,10 @@ domainFilters:
 
 extraArgs:
   aws-zone-type: public
-  ingress-class: nginx
   default-targets: sokh.duckdns.org.
+
+sources:
+  - gateway-httproute
 
 env:
   - name: AWS_EC2_METADATA_SERVICE_ENDPOINT
