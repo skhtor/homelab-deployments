@@ -16,6 +16,11 @@ controllers:
                 key: password
           - name: DATABASE_URL
             value: postgresql://ants:$(DB_PASSWORD)@postgresql.aichallenge.svc.cluster.local:5432/ants
+          - name: ADMIN_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: aichallenge-admin
+                key: ADMIN_SECRET
         probes:
           liveness:
             enabled: true
