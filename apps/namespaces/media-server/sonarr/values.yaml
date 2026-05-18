@@ -28,7 +28,7 @@ route:
         namespace: networking
         sectionName: https
     hostnames:
-      - sonarr.home
+      - sonarr.sass.home
 
 persistence:
   sonarr-data:

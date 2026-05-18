@@ -10,7 +10,7 @@ spec:
       namespace: networking
       sectionName: https
   hostnames:
-    - gotify.home
+    - gotify.sass.home
   rules:
     - backendRefs:
         - name: gotify

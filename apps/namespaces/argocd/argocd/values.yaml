@@ -4,7 +4,7 @@ crds:
 
 ## Globally shared configuration
 global:
-  domain: argocd.home
+  domain: argocd.sass.home
 
 server:
   ingress:
@@ -93,7 +93,7 @@ configs:
       https
     kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-helm
     statusbadge.enabled: true
-    url: http://argocd.home
+    url: http://argocd.sass.home
 
   params:
     server.insecure: true

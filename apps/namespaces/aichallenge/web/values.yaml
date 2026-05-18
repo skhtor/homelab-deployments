@@ -53,7 +53,7 @@ route:
         namespace: networking
         sectionName: https
     hostnames:
-      - ants.home
+      - ants.sass.home
 
 persistence:
   bots:

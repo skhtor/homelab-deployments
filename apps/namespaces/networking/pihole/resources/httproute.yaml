@@ -10,7 +10,7 @@ spec:
       namespace: networking
       sectionName: https
   hostnames:
-    - pihole.home
+    - pihole.sass.home
   rules:
     - backendRefs:
         - name: pihole-web

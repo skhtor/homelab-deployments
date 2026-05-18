@@ -19,13 +19,13 @@ spec:
         namespaces:
           from: All
     - name: https
-      hostname: "*.home"
+      hostname: "*.sass.home"
       protocol: HTTPS
       port: 443
       tls:
         mode: Terminate
         certificateRefs:
-          - name: wildcard-home-tls
+          - name: wildcard-sass-home-tls
       allowedRoutes:
         namespaces:
           from: All

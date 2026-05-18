@@ -10,7 +10,7 @@ spec:
       namespace: networking
       sectionName: https
   hostnames:
-    - n8n.home
+    - n8n.sass.home
   rules:
     - backendRefs:
         - name: n8n

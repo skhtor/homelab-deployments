@@ -28,7 +28,7 @@ route:
         namespace: networking
         sectionName: https
     hostnames:
-      - radarr.home
+      - radarr.sass.home
 
 persistence:
   radarr-data:
