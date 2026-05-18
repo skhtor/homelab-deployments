@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: gateway-helm
+    repo: oci://docker.io/envoyproxy
+    version: 1.8.0
+    releaseName: &releaseName envoy-gateway
+    namespace: &releaseNamespace networking
+    valuesFile: values.yaml
+    includeCRDs: true
+commonAnnotations:
+  meta.helm.sh/release-name: *releaseName
+  meta.helm.sh/release-namespace: *releaseNamespace
+commonLabels:
+  app.kubernetes.io/managed-by: Helm
+resources:
+  - resources/gateway-public.yaml
+  - resources/gateway-internal.yaml
